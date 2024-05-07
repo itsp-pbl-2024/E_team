@@ -6,18 +6,21 @@ services:
       - "3000:3000"
     volumes:
       # . に package.json などがある想定
-      - ./:/workspace
+      - ./frontend/:/workspace
 
       # node_modulesを名前付きボリュームに隠す
       - front_node_modules:/workspace/node_modules
+    depends_on:
+      - backend
+      
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
 
 volumes:
   front_node_modules:
-  #   depends_on:
-  #     - backend
-  # backend:
-  #   build: ./backend
-  #   ports:
-  #     - "8000:8000"
-  #   volumes:
-  #     - ./backend:/app
+
+  
