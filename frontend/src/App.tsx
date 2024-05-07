@@ -1,24 +1,5 @@
-// import {Link} from "react-router-dom";
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-// import LinkButton from "./children/LinkButton";
-// import { useState } from "react";
-// import TopicGenerationButton from "./Questioner/TopicGenerationButton";
-
-// function App() {
-//   const title: string="Hello World!";
-//   return (
-//     <div className="App">
-//       <h1>{title}</h1>
-//       <LinkButton text='ボタン' link="/test" />
-//     </div>
-//   );
-// } 
-
-// export default App;
-
-
+import './App.css';
+import TopicGenerationButton from "./Questioner/TopicGenerationButton";
 import AnswerBox from './answerbox/AnswerBox';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Top from "./top/Top";
@@ -39,15 +20,25 @@ function App() {
                         設定
                     </button>
                 </Link>
+                <Link to={"/Questioner"}>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        出題者
+                    </button>
+                </Link>
+                <Link to={"/answerbox"}>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        回答者
+                    </button>
+                </Link>
             </header>
 
             {/* パスごとに表示するコンポーネントを変える */}
             <Routes>
                 <Route path='/' element={<Top/>}/>
                 <Route path='/settings' element={<Settings/>}/>
-                
+                <Route path='/Questioner' element={<TopicGenerationButton/>}/>
+                <Route path='answerbox' element={<AnswerBox/>}/>
             </Routes>
-            <AnswerBox />
         </div>
     );
 }
