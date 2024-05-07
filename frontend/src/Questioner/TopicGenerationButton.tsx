@@ -14,6 +14,6 @@ function TopicGenerationButton(){
             <p>{topic[randomIndex]}</p>
         </div>
     );
-};
+}; 
 
 export default TopicGenerationButton;
