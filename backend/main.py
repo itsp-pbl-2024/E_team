@@ -1,10 +1,23 @@
 from fastapi import FastAPI
 import random
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-theme_list = ["東工大", "大岡山"]
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+theme_list = ["東工大", "大岡山"]
 
 @app.get("/theme")
 async def get_theme():
