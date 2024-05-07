@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+
+import AnswerBox from './answerbox/AnswerBox';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Top from "./top/Top";
 import Settings from "./settings/Settings";
@@ -27,6 +29,7 @@ function App() {
                 <Route path='/' element={<Top/>}/>
                 <Route path='/settings' element={<Settings/>}/>
             </Routes>
+            <AnswerBox />
         </div>
     );
 }
