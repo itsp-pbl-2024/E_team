@@ -25,23 +25,6 @@ import Top from "./top/Top";
 import Settings from "./settings/Settings";
 
 function App() {
-//   const title: string = "Hello World!";
-//   const [num, setNum] = useState(0);
-
-//   const increment = () => {
-//     setNum(num+1);
-//     console.log(num);
-//   };
-
-//   return (
-//     <div className="App">
-//       <h1>{title}</h1>
-//       {/* {num}回押しました。
-//       <LinkButton text="ボタン" link="/test" />
-//       <button type="button" onClick={increment}>増やす</button> */}
-//       <TopicGenerationButton />
-//     </div>
-//   );
     return (
         <div className="App">
             {/* ヘッダー、すべての画面に表示される*/}
@@ -62,6 +45,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Top/>}/>
                 <Route path='/settings' element={<Settings/>}/>
+                
             </Routes>
             <AnswerBox />
         </div>
