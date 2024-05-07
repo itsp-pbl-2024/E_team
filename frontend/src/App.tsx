@@ -14,7 +14,7 @@ import TopicGenerationButton from "./Questioner/TopicGenerationButton";
 //       <LinkButton text='ボタン' link="/test" />
 //     </div>
 //   );
-// }
+// } 
 
 // export default App;
 
