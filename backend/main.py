@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import random
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -16,10 +17,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+theme_list = ["東工大", "大岡山"]
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+@app.get("/theme")
+async def get_theme():
+    index = random.randrange(0, len(theme_list), 1)
+    return {
+        "theme": theme_list[index]
+    }
 
 # pip install uvicorn fastapi
 #  uvicorn main:app --reload で起動

@@ -5,12 +5,12 @@ function Settings() {
     const [test, setTest] = useState()
 
     useEffect(() => {
-        fetch(process.env.REACT_APP_BACKEND_URL?.toString()??"")
+        fetch((process.env.REACT_APP_BACKEND_URL?.toString()??"") + "/theme")
             .then(res => res.json())
             .then(
                 (result) => {
                     console.log(result)
-                    setTest(result.message)
+                    setTest(result.theme)
                 },
                 (error) => {
                 }
