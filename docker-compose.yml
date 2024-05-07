@@ -5,12 +5,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      # . に package.json などがある想定
-      - ./:/workspace
-
-      # node_modulesを名前付きボリュームに隠す
-      - front_node_modules:/workspace/node_modules
-
+      - ./frontend:/app
+      - front_node_modules:/app/node_modules
 volumes:
   front_node_modules:
   #   depends_on:
