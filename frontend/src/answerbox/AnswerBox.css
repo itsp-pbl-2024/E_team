@@ -23,7 +23,7 @@
 }
 
 .answer-box p.correct {
-  @apply text-red-500;
+  @apply text-green-500;
 }
 
 .answer-box p.incorrect {
