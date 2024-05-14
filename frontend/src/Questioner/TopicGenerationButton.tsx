@@ -1,7 +1,7 @@
 import {useState} from "react";
 import './TopicGenerationButton.css'
 import {useDispatch, useSelector} from "react-redux";
-import ThemeReducer, {setTheme} from "./theme";
+import ThemeReducer, {setTheme} from "../app/redux/theme";
 import store, {StateType} from "../app/store";
 
 function TopicGenerationButton() {
