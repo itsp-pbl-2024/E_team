@@ -20,7 +20,7 @@ function AnswerBox() {
   };
 
   return (
-    <div>
+    <div className="answer-box">
       <input
         type="text"
         value={userAnswer}
@@ -29,9 +29,9 @@ function AnswerBox() {
       />
       <button onClick={checkAnswer}>Check</button>
       {isCorrect ? (
-        <p style={{ color: 'green' }}>Correct!</p>
+        <p className="correct">Correct!</p>
       ) : (
-        <p style={{ color: 'red' }}>Incorrect. Try again!</p>
+        <p className="incorrect">Incorrect. Try again!</p>
       )}
     </div>
   );
