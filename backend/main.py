@@ -28,7 +28,10 @@ async def get_theme():
 
 @app.get("/censor")
 async def get_theme(theme:str, sentence: str):
-    censored=sentence.replace(theme,'')
+    mask_asta = ''
+    for i in range(len(theme)):
+        mask_asta = mask_asta+'*'
+    censored=sentence.replace(theme,mask_asta)
     return {
         "censoredSentence": censored
     }
