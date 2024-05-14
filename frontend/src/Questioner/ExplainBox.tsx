@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-//import './AnswerBox.css'
+import TopicGenerationButton from "./TopicGenerationButton";
+import {useSelector} from "react-redux";
+import store, {StateType} from "../app/store";
 
 function ExplainBox() {
     const [explanation, setExplanation] = useState('');
     const [censoredExplanation, setCensoredExplanation] = useState<string>('');
 
-    const correctAnswer = '東工大';
+    const theme = useSelector((state: StateType) => state.theme.value)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setExplanation(event.target.value);
@@ -14,7 +16,7 @@ function ExplainBox() {
     const handleButtonClick = async () => {
         try {
             const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString()??"") + "/censor?"+
-            "theme="+correctAnswer+"&sentence="+explanation);
+            "theme="+theme+"&sentence="+explanation);
             if (response.ok) {
                 const data = await response.json();
                 setCensoredExplanation(data.censoredSentence);
@@ -28,6 +30,7 @@ function ExplainBox() {
 
     return (
         <div>
+        <TopicGenerationButton />
         <textarea
             value={explanation}
             onChange={handleInputChange}
