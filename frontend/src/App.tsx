@@ -37,7 +37,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Top/>}/>
                 <Route path='/settings' element={<Settings/>}/>
-                <Route path='/Questioner' element={<TopicGenerationButton/>}/>
+                <Route path='/Questioner' element={<ExplainBox/>}/>
                 <Route path='/answerbox' element={<AnswerBox/>}/>
 
             </Routes>
