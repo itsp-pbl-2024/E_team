@@ -4,6 +4,7 @@ import AnswerBox from './answerbox/AnswerBox';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Top from "./top/Top";
 import Settings from "./settings/Settings";
+import ExplainBox from './Questioner/ExplainBox';
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
                 <Route path='/settings' element={<Settings/>}/>
                 <Route path='/Questioner' element={<TopicGenerationButton/>}/>
                 <Route path='/answerbox' element={<AnswerBox/>}/>
+
             </Routes>
         </div>
     );
