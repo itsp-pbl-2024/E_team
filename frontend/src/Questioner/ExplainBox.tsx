@@ -13,7 +13,6 @@ function ExplainBox() {
         setExplanation(event.target.value);
     };
 
-    //まだ検閲の実装はほとんどダミー
     const handleButtonClick = async () => {
         try {
             const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString()??"") + "/censor?"+
@@ -41,7 +40,7 @@ function ExplainBox() {
         <button 
             onClick={handleButtonClick}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded mt-2"
-        >送る</button>
+        >検閲する</button>
         <p>これは平文　　{explanation}</p>
         <p>これは検閲済　{censoredExplanation}</p>
         </div>       
