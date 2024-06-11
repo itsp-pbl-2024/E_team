@@ -1,12 +1,5 @@
 import spacy
 
-DEBUG = True
-
-
-def log(s):
-    if DEBUG:
-        print(s)
-
 ###
 # Censor words from tetx that are very similar to theme
 ###
@@ -34,7 +27,7 @@ def censor(text: str, theme: str):
     return censored_text
 
 
-def censor_by_list(text: str, theme, refs):
+def censor_by_list(text: str, theme: str, refs: list[str]):
     nlp = spacy.load("ja_core_news_lg")
     if len(refs) == 0:
         return "Error: Please provide a theme for censorship."
@@ -45,10 +38,6 @@ def censor_by_list(text: str, theme, refs):
         ref_theme_docs.append(nlp(ref_theme))
 
     censored_tokens = []
-
-    log('Theme tokens:\n')
-    for x in theme_tokens:
-        log(x)
 
     for token in doc:
         if token.similarity(theme_doc) > 0.4 or any(abs(token.similarity(ref_theme)) > 0.7 for ref_theme in ref_theme_docs):
