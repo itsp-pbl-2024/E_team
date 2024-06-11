@@ -14,12 +14,22 @@ function ExplainBox() {
     };
 
     const handleButtonClick = async () => {
+        const requestBody = {
+            text: explanation,
+            theme: theme,
+        };
         try {
-            const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString()??"") + "/censor?"+
-            "theme="+theme+"&sentence="+explanation);
+            const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString()??"") + "/censor", {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody),
+            });
             if (response.ok) {
                 const data = await response.json();
-                setCensoredExplanation(data.censoredSentence);
+                console.log(data);
+                setCensoredExplanation(data['censored_text']);
             } else {
                 console.error('Failed to fetch data');
             }
