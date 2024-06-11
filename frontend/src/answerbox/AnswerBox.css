@@ -1,0 +1,31 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.answer-box {
+  @apply font-sans;
+}
+
+.answer-box input[type="text"] {
+  @apply px-4 py-2 mr-2 rounded border border-gray-300;
+}
+
+.answer-box button {
+  @apply px-4 py-2 text-white bg-blue-500 rounded cursor-pointer;
+}
+
+.answer-box button:hover {
+  @apply bg-blue-700;
+}
+
+.answer-box p {
+  @apply mt-2;
+}
+
+.answer-box p.correct {
+  @apply text-green-500;
+}
+
+.answer-box p.incorrect {
+  @apply text-red-500;
+}
