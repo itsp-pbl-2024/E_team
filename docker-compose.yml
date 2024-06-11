@@ -38,6 +38,8 @@ services:
       "
     networks:
       - pasty
+    env_file:
+      - ./backend/.env
 
 volumes:
   front_node_modules:
