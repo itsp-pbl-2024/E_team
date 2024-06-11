@@ -21,23 +21,23 @@ function AnswerBox() {
         }
     };
 
-    return (
-        <div>
-            <input
-                type="text"
-                value={userAnswer}
-                onChange={handleInputChange}
-                placeholder="Enter your answer"
-            />
+  return (
+    <div className="answer-box">
+      <input
+        type="text"
+        value={userAnswer}
+        onChange={handleInputChange}
+        placeholder="Enter your answer"
+      />
+      <button onClick={checkAnswer}>Check</button>
+      {isCorrect ? (
+        <p className="correct">Correct!</p>
+      ) : (
+        <p className="incorrect">Incorrect. Try again!</p>
+      )}
+    </div>
+  );
 
-            <button onClick={checkAnswer}>Check</button>
-            {isCorrect ? (
-                <p style={{color: 'green'}}>Correct!</p>
-            ) : (
-                <p style={{color: 'red'}}>Incorrect. Try again!</p>
-            )}
-        </div>
-    );
 }
 
 export default AnswerBox;

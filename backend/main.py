@@ -1,12 +1,16 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 import random
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from util.censor import censor
+
 
 app = FastAPI()
 from fastapi.middleware.cors import CORSMiddleware
 
 origins = [
     "http://localhost",
-    "http://localhost:3000",
+    "http://localhost:3000"
 ]
 
 app.add_middleware(
@@ -26,15 +30,15 @@ async def get_theme():
         "theme": theme_list[index]
     }
 
-@app.get("/censor")
-async def get_theme(theme:str, sentence: str):
-    mask_asta = ''
-    for i in range(len(theme)):
-        mask_asta = mask_asta+'*'
-    censored=sentence.replace(theme,mask_asta)
-    return {
-        "censoredSentence": censored
-    }
+class CensorItem(BaseModel):
+    text: str
+    theme: str
+
+@app.post("/censor")
+async def censor_text(item: CensorItem):
+    censored_text = censor(item.text, item.theme)
+    return {"censored_text": censored_text}
+
 
 # pip install uvicorn fastapi
 #  uvicorn main:app --reload で起動
