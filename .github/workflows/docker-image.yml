@@ -15,5 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: touch backend/.env &&
-           docker compose up -d
+      run: |
+            touch backend/.env
+            docker compose up -d
