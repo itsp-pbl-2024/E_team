@@ -1,10 +1,9 @@
 import './App.css';
-import TopicGenerationButton from "./Questioner/TopicGenerationButton";
 import AnswerBox from './answerbox/AnswerBox';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Top from "./top/Top";
 import Settings from "./settings/Settings";
-import ExplainBox from './explainbox/ExplainBox';
+import ExplainBox from './Questioner/ExplainBox';
 
 function App() {
     return (
@@ -37,14 +36,10 @@ function App() {
             <Routes>
                 <Route path='/' element={<Top/>}/>
                 <Route path='/settings' element={<Settings/>}/>
-                <Route path='/Questioner' element={<TopicGenerationButton/>}/>
+                <Route path='/Questioner' element={<ExplainBox />}/>
                 <Route path='answerbox' element={<AnswerBox/>}/>
             </Routes>
-<<<<<<< HEAD
-            <ExplainBox />
             <AnswerBox />
-=======
->>>>>>> main
         </div>
     );
 }
