@@ -1,4 +1,5 @@
 import spacy
+from fastapi import HTTPException
 
 DEBUG = True
 
@@ -12,7 +13,11 @@ def log(s):
 def censor(text: str, theme: str):
     nlp = spacy.load("ja_core_news_sm")
     if not theme:
-        return "Error: Please provide a theme for censorship."
+        log("Error: Please provide a theme for censorship.")
+        raise HTTPException(status_code=400, detail="Error: No theme selected")
+    if not text:
+        log("Error: Please provide an explanation for censorship.")
+        raise HTTPException(status_code=400, detail="Error: Please input explanation")
     doc = nlp(text)
     theme_doc = nlp(theme)
 
