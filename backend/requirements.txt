@@ -1,0 +1,7 @@
+uvicorn
+fastapi
+pydantic
+pytest
+wheel
+spacy
+openai
