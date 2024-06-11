@@ -1,4 +1,5 @@
 import spacy
+from fastapi import HTTPException
 
 ###
 # Censor words from tetx that are very similar to theme
@@ -8,7 +9,11 @@ import spacy
 def censor(text: str, theme: str):
     nlp = spacy.load("ja_core_news_lg")
     if not theme:
-        return "Error: Please provide a theme for censorship."
+        log("Error: Please provide a theme for censorship.")
+        raise HTTPException(status_code=400, detail="Error: No theme selected")
+    if not text:
+        log("Error: Please provide an explanation for censorship.")
+        raise HTTPException(status_code=400, detail="Error: Please input explanation")
     doc = nlp(text)
     theme_doc = nlp(theme)
     for itr in doc:
