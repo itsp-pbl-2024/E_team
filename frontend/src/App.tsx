@@ -1,4 +1,5 @@
 import './App.css';
+import TopicGenerationButton from "./Questioner/TopicGenerationButton";
 import AnswerBox from './answerbox/AnswerBox';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Top from "./top/Top";
@@ -36,10 +37,10 @@ function App() {
             <Routes>
                 <Route path='/' element={<Top/>}/>
                 <Route path='/settings' element={<Settings/>}/>
-                <Route path='/Questioner' element={<ExplainBox />}/>
-                <Route path='answerbox' element={<AnswerBox/>}/>
+                <Route path='/Questioner' element={<ExplainBox/>}/>
+                <Route path='/answerbox' element={<AnswerBox/>}/>
+
             </Routes>
-            <AnswerBox />
         </div>
     );
 }
