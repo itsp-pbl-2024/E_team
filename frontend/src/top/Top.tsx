@@ -6,7 +6,7 @@ import store, { StateType } from "../app/store";
 /**
  * ユーザーの役割の列挙型
  */
-enum UserRole {
+export enum UserRole {
     Unassigned = "未決定",
     Explanation = "説明側",
     Answer = "回答側"
@@ -15,7 +15,7 @@ enum UserRole {
 /**
  * ユーザ情報を表す型
  */
-export interface UserPropaty {
+export type UserPropaty={
     username: string;
     role: UserRole;
 }
@@ -25,12 +25,15 @@ function Top() {
     const [participants, setParticipants] = useState<UserPropaty[]>([]);
 
     const dispatch = useDispatch()
-    const userList = useSelector((state: StateType) => state.userList)
+    const userList = useSelector((state: StateType) => state.userList.value)
 
     const handleAddParticipant = () => {
       if (username.trim() !== '') {
         const newParticipant: UserPropaty = { username, role: UserRole.Unassigned };
+        //if (userList == ''){console.log("null char")}
+        //console.log(userList)
         setParticipants([...participants, newParticipant]);
+        //dispatch(setUserList([...userList , newParticipant]))
         dispatch(setUserList(participants))
         setUsername('');
       }
@@ -74,6 +77,7 @@ function Top() {
             
             <div>
             <h2>参加者一覧</h2>
+                {typeof(userList)}
                 <ul>
                     {participants.map((participant, index) => (
                         <li key={index}>

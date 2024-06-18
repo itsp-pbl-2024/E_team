@@ -1,23 +1,20 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit'
-import {UserPropaty} from "../../top/Top"
+import {UserRole, UserPropaty} from "../../top/Top"
 
-interface UserState {
-    value: UserPropaty[];
-}
-
-const initialState: UserState = {
-    value: []
-};
+const initList:UserPropaty[] = []
 
 export const userListSlice = createSlice({
     name: 'userList',
-    initialState,
+    initialState: {
+        value: initList
+    },
     reducers: {
-        setUserList: (state, action) => {
-            return action.payload
-        },
+        setUserList: (state, action: PayloadAction<UserPropaty[]>) => {
+            console.log(action)
+            state.value = action.payload;
+        }
     }
-})
+});
 
 // Action creators are generated for each case reducer function
 export const {setUserList} = userListSlice.actions
