@@ -23,16 +23,6 @@ function App() {
                         設定
                     </button>
                 </Link>
-                {/* <Link to={"/Questioner"}>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        出題者
-                    </button>
-                </Link> */}
-                {/* <Link to={"/answerbox"}>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        回答者
-                    </button>
-                </Link> */}
             </header>
 
             {/* パスごとに表示するコンポーネントを変える */}

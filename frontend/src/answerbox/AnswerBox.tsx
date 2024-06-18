@@ -9,6 +9,8 @@ import ToQuestionerTransitionConfirm from '../transition_confirm/ToQuestionerTra
 function AnswerBox() {
     const [userAnswer, setUserAnswer] = useState('');
     const [isCorrect, setIsCorrect] = useState(false);
+    const [isCheckButtonDisabled, setIsCheckButtonDisabled] = useState(false);
+    const [isTransitionButtonDisabled, setIsTransitionButtonDisabled] = useState(false);
 
     const theme = useSelector((state: StateType) => state.theme.value)
 
@@ -19,9 +21,11 @@ function AnswerBox() {
     const checkAnswer = () => {
         if (userAnswer.toLowerCase() === theme.toLowerCase()) {
             setIsCorrect(true);
+            setIsTransitionButtonDisabled(true);
         } else {
             setIsCorrect(false);
         }
+        setIsCheckButtonDisabled(true);
     };
 
   return (
@@ -32,21 +36,20 @@ function AnswerBox() {
         onChange={handleInputChange}
         placeholder="Enter your answer"
       />
-      <button onClick={checkAnswer}>Check</button>
+      <button className='checkAnswerButton' onClick={checkAnswer} disabled={isCheckButtonDisabled}>Check</button>
       {isCorrect ? (
         <p className="correct">Correct!</p>
       ) : (
         <p className="incorrect">Incorrect. Try again!</p>
       )}
       <Link to={"/to_questioner_transition_confirm"}>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          出題者
+        <button className='TransitionButton' disabled={isTransitionButtonDisabled}>
+          出題者画面へ
         </button>
       </Link>
       <Routes>
         <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
       </Routes>
-      
     </div>
   );
 

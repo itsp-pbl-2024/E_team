@@ -29,3 +29,29 @@
 .answer-box p.incorrect {
   @apply text-red-500;
 }
+
+.checkAnswerButton:hover {
+  background-color: #0056b3; /* ホバー時の背景色 */
+}
+
+.checkAnswerButton:disabled{
+  background-color: gray;
+
+}
+.checkAnswerButton:disabled:hover{
+  background-color: gray;
+
+}
+
+.TransitionButton:hover {
+  background-color: #0056b3; /* ホバー時の背景色 */
+}
+
+.TransitionButton:disabled{
+  background-color: gray;
+
+}
+.TransitionButton:disabled:hover{
+  background-color: gray;
+
+}

@@ -1,10 +1,6 @@
 import '../App.css';
-import React, {useState} from 'react';
-import {useSelector} from "react-redux";
-import store, {StateType} from "../app/store";
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import ExplainBox from '../Questioner/ExplainBox';
-import AnswerBox from '../answerbox/AnswerBox';
 
 function ToQuestionerTransitionConfirm() {
     console.log("In Transition Confirm");
@@ -20,7 +16,6 @@ function ToQuestionerTransitionConfirm() {
         <Routes>        
             <Route path='/Questioner' element={<ExplainBox/>}/>
         </Routes>
-      
     </div>
   );
 
