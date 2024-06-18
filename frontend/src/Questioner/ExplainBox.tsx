@@ -1,16 +1,18 @@
 import '../App.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import TopicGenerationButton from "./TopicGenerationButton";
 import {useSelector} from "react-redux";
 import store, {StateType} from "../app/store";
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import ToAnswerTransitionConfirm from '../transition_confirm/ToAnswerTransitionConfirm';
+import { TextContext } from '../TextContext';
 
 function ExplainBox() {
     const [explanation, setExplanation] = useState('');
     const [censoredExplanation, setCensoredExplanation] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isClicked, setIsClicked] = useState<Boolean>(false);
+    const textContext = useContext(TextContext);
 
     const theme = useSelector((state: StateType) => state.theme.value)
 
@@ -24,7 +26,7 @@ function ExplainBox() {
             theme: theme,
         };
         try {
-            const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString()??"") + "/censor", {
+            const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString()??"") + textContext?.text, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -51,6 +53,7 @@ function ExplainBox() {
 
     return (
         <div>
+            <p>{textContext?.text}</p>
         <TopicGenerationButton />
 
         <div className="flex flex-col items-center p-4">

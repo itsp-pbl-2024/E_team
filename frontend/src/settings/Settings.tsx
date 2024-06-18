@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import SwitchCensorButton from "./SwitchCensorButton";
 
 function Settings() {
 
@@ -22,6 +23,7 @@ function Settings() {
             <div>
                 設定です
                 <span> {test} </span>
+                <SwitchCensorButton />
             </div>
         </>
     );
