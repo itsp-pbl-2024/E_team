@@ -7,9 +7,9 @@ import store, { StateType } from "../app/store";
  * ユーザーの役割の列挙型
  */
 export enum UserRole {
-    Unassigned = "未決定",
-    Explanation = "説明側",
-    Answer = "回答側"
+    Unassigned = "undefined",
+    Explanation = "explain",
+    Answer = "answer"
 }
 
 /**
@@ -30,8 +30,8 @@ function Top() {
     const handleAddParticipant = () => {
       if (username.trim() !== '') {
         const newParticipant: UserPropaty = { username, role: UserRole.Unassigned };
-        //if (userList == ''){console.log("null char")}
-        //console.log(userList)
+        if (userList == ''){console.log("null char")}
+        console.log(userList)
         setParticipants([...participants, newParticipant]);
         //dispatch(setUserList([...userList , newParticipant]))
         dispatch(setUserList(participants))
@@ -77,7 +77,6 @@ function Top() {
             
             <div>
             <h2>参加者一覧</h2>
-                {typeof(userList)}
                 <ul>
                     {participants.map((participant, index) => (
                         <li key={index}>

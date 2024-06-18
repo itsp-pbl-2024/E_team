@@ -6,12 +6,14 @@ const initList:UserPropaty[] = []
 export const userListSlice = createSlice({
     name: 'userList',
     initialState: {
-        value: initList
+        value: "a"//initList
     },
     reducers: {
-        setUserList: (state, action: PayloadAction<UserPropaty[]>) => {
+        //setUserList: (state, action: PayloadAction<UserPropaty[]>) => {
+        setUserList: (state, action) => {
             console.log(action)
-            state.value = action.payload;
+            //state.value = action.payload;
+            state.value = "b";
         }
     }
 });
