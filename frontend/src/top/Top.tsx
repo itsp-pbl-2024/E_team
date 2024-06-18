@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { setUserList } from "../app/redux/userList";
+import store, { StateType } from "../app/store";
+
 /**
  * ユーザーの役割の列挙型
  */
@@ -11,7 +15,7 @@ enum UserRole {
 /**
  * ユーザ情報を表す型
  */
-interface UserPropaty {
+export interface UserPropaty {
     username: string;
     role: UserRole;
 }
@@ -19,11 +23,15 @@ interface UserPropaty {
 function Top() {
     const [username, setUsername] = useState<string>('');
     const [participants, setParticipants] = useState<UserPropaty[]>([]);
-  
+
+    const dispatch = useDispatch()
+    const userList = useSelector((state: StateType) => state.userList)
+
     const handleAddParticipant = () => {
       if (username.trim() !== '') {
         const newParticipant: UserPropaty = { username, role: UserRole.Unassigned };
         setParticipants([...participants, newParticipant]);
+        dispatch(setUserList(participants))
         setUsername('');
       }
     };
@@ -45,8 +53,8 @@ function Top() {
             }
             return { ...participant, role: UserRole.Answer };
         });
-
         setParticipants(updatedParticipants);
+        dispatch(setUserList(participants))
     };
   
     return (
