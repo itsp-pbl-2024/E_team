@@ -1,7 +1,10 @@
+import '../App.css';
 import React, { useState } from 'react';
 import TopicGenerationButton from "./TopicGenerationButton";
 import {useSelector} from "react-redux";
 import store, {StateType} from "../app/store";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import ToAnswerTransitionConfirm from '../transition_confirm/ToAnswerTransitionConfirm';
 
 function ExplainBox() {
     const [explanation, setExplanation] = useState('');
@@ -49,6 +52,7 @@ function ExplainBox() {
     return (
         <div>
         <TopicGenerationButton />
+
         <div className="flex flex-col items-center p-4">
             <textarea
                 value={explanation}
@@ -84,6 +88,15 @@ function ExplainBox() {
             
             
         }
+
+        <Link to={"/to_answer_transition_confirm"}>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                回答者画面へ
+            </button>
+        </Link>
+        <Routes>
+            <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm/>}/>
+        </Routes>
         
         </div>       
     );
