@@ -48,14 +48,11 @@ function AnswerBox() {
             {/*) : (*/}
             {/*    <p className="incorrect">Incorrect. Try again!</p>*/}
             {/*)}*/}
-            <Link to={"/to_questioner_transition_confirm"}>
-                <button className='TransitionButton' disabled={isTransitionButtonDisabled}>
+            <Link to={"/result"}>
+                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' disabled={isTransitionButtonDisabled}>
                     確定する
                 </button>
             </Link>
-            <Routes>
-                <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
-            </Routes>
         </div>
     );
 
