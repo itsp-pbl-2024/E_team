@@ -87,20 +87,14 @@ function Players() {
                 <div className='grid grid-cols-4 gap-4'>
                     {userList.map((participant, index) =>
                         <div key={index} className={'p-4 rounded-md ' + ((participant.role == UserRole.Unassigned) ? "bg-gray-300" : participant.role == UserRole.Explanation ? "bg-red-100" : "bg-green-100")}  >
-                            <h2 className='text-xl m-2'>参加者一覧</h2>
+                            {participant.username} - {participant.role}
                         </div>
                     )}
-                    <div>
-                        <div className='grid grid-cols-4 gap-4'>
-                            {userList.map((participant, index) =>
-                                <div key={index} className={'p-4 rounded-md ' + ((participant.role == UserRole.Unassigned) ? "bg-gray-300" : participant.role == UserRole.Explanation ? "bg-red-100" : "bg-green-100")}  >
-                                    {participant.username} - {participant.role}
-                                </div>
-                            )}
-                        </div>
-                    </div>
                 </div>
-                <button onClick={assignRole} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            </div>
+
+            <div>
+                <button onClick={assignRole} className='m-4'>
                     役割を決める
                 </button>
                 <Link to={"/questioner"}>
@@ -112,25 +106,11 @@ function Players() {
                 </Link>
 
 
-                <div>
-                    <button onClick={assignRole} className='m-4'>
-                        役割を決める
-                    </button>
-                    <Link to={"/questioner"}>
-                        <button className='m-4'
-                            disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length === 0}
-                        >
-                            確定する
-                        </button>
-                    </Link>
-
-
-                </div>
-                <Routes>
-                    <Route path='/questioner' element={<ExplainBox />} />
-                </Routes>
-            </div >
-        </div>
+            </div>
+            <Routes>
+                <Route path='/questioner' element={<ExplainBox />} />
+            </Routes>
+        </div >
     );
 }
 
