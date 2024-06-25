@@ -37,7 +37,7 @@ function Players() {
             dispatch(setUserList([...userList, newParticipant]))
             setUsername('');
         }
-    };
+    }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
@@ -62,16 +62,15 @@ function Players() {
 
     return (
         <div>
-            <h1 className='text-2xl'>プレイヤー名を入力してください</h1>
+            <h1>トップです</h1>
             <div>
                 <input
                     type="text"
                     value={username}
                     onChange={handleInputChange}
-                    className='p-2'
                     placeholder="名前を入力してください"
                 />
-                <button onClick={handleAddParticipant}>
+                <button onClick={handleAddParticipant} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     追加
                 </button>
             </div>
@@ -79,7 +78,7 @@ function Players() {
             <div>
                 <h2 className='text-xl'>参加者一覧</h2>
 
-            </div>
+            </div >
             <div>
                 <div className='grid grid-cols-4 gap-4'>
                     {userList.map((participant, index) => (
@@ -89,24 +88,22 @@ function Players() {
                     ))}
                 </div>
             </div>
-            <div>
-                <button onClick={assignRole} className='m-4'>
-                    役割を決める
+            <button onClick={assignRole} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                役割を決める
+            </button>
+            <Link to={"/questioner"}>
+                <button className='m-4'
+                    disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length === 0}
+                >
+                    確定する
                 </button>
-                <Link to={"/questioner"}>
-                    <button className='m-4'
-                        disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length === 0}
-                    >
-                        確定する
-                    </button>
-                </Link>
+            </Link>
 
 
-            </div>
             <Routes>
                 <Route path='/questioner' element={<ExplainBox />} />
             </Routes>
-        </div>
+        </div >
     );
 }
 
