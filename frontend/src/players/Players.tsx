@@ -1,6 +1,6 @@
 import '../App.css';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import ExplainBox from '../Questioner/ExplainBox';
+import ExplainBox from '../questioner/ExplainBox';
 import React, {useState} from 'react';
 /**
  * ユーザーの役割の列挙型
@@ -19,7 +19,7 @@ interface UserPropaty {
     role: UserRole;
 }
 
-function Top() {
+function Players() {
     const [username, setUsername] = useState<string>('');
     const [participants, setParticipants] = useState<UserPropaty[]>([]);
   
@@ -80,16 +80,16 @@ function Top() {
             <button onClick={assignRole} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 役割を決める
             </button>
-            <Link to={"/Questioner"}>
+            <Link to={"/questioner"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    ゲーム開始
+                    確定する
                 </button>
             </Link>
             <Routes>
-                <Route path='/Questioner' element={<ExplainBox/>}/>
+                <Route path='/questioner' element={<ExplainBox/>}/>
             </Routes>
         </div>
     );
 }
   
-export default Top;
+export default Players;
