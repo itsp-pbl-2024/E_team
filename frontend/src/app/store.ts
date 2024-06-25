@@ -1,11 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit'
 import ThemeReducer from "./redux/theme"
-import CensorTypeReducer from "./redux/censorType"
+import SettingsReducer from "./redux/settings"
 
 const store = configureStore({
     reducer: {
         theme: ThemeReducer,
-        censorType: CensorTypeReducer,
+        settings: SettingsReducer,
     }
 })
 
