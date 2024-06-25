@@ -9,26 +9,22 @@ export type CensorType = {
     path: string
 }
 
-export const CensorTypes = [
-    {
+export const CensorTypes = {
+    spacy: {
         label: "spaCy",
         path: "/censor"
     },
-    {
+    chatgpt: {
         label: "ChatGPT",
         path: "/censor/chatgpt"
     }
-]
+}
 
 export const settingSlice = createSlice({
     name: 'settings',
     initialState: {
         value: {
-            censorType:
-                {
-                    label: "spaCy",
-                    path: "/censor"
-                }
+            censorType: CensorTypes.spacy
         } as SettingsType,
     },
     reducers: {
