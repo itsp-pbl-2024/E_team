@@ -1,18 +1,17 @@
 import '../App.css';
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import TopicGenerationButton from "./TopicGenerationButton";
 import {useSelector} from "react-redux";
-import store, {StateType} from "../app/store";
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import ToAnswerTransitionConfirm from '../transition_confirm/ToAnswerTransitionConfirm';
-import {TextContext} from '../TextContext';
+import {StateType} from "../app/store";
+import {Link} from "react-router-dom";
+import {CensorType} from "../app/redux/settings";
 
 function ExplainBox() {
     const [explanation, setExplanation] = useState('');
     const [censoredExplanation, setCensoredExplanation] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isClicked, setIsClicked] = useState<Boolean>(false);
-    const textContext = useContext(TextContext);
+    const censorType: CensorType = useSelector((state: StateType) => state.settings.value.censorType)
 
     const theme = useSelector((state: StateType) => state.theme.value)
 
@@ -26,7 +25,7 @@ function ExplainBox() {
             theme: theme,
         };
         try {
-            const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + textContext?.text, {
+            const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + censorType.path, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +52,6 @@ function ExplainBox() {
 
     return (
         <div>
-            <TopicGenerationButton/>
             <TopicGenerationButton/>
 
             <div className="flex flex-col items-center p-4">
@@ -100,10 +98,6 @@ function ExplainBox() {
                     回答者画面へ
                 </button>
             </Link>
-            <Routes>
-                <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm/>}/>
-            </Routes>
-
         </div>
     );
 }

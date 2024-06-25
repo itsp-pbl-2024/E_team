@@ -3,8 +3,6 @@ import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import AnswerBox from '../answerbox/AnswerBox';
 
 function ToAnswerTransitionConfirm() {
-    console.log("In Transition Confirm");
-
     return (
         <div className="transition_confirm">
             <div className="bg-gradient-to-r from-red-300 to-emerald-200 p-2">出題者→回答者</div>
@@ -23,9 +21,6 @@ function ToAnswerTransitionConfirm() {
                     回答画面へ
                 </button>
             </Link>
-            <Routes>
-                <Route path='/answerbox' element={<AnswerBox/>}/>
-            </Routes>
         </div>
     );
 
