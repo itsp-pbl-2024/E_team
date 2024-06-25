@@ -1,19 +1,16 @@
 import './App.css';
-import TopicGenerationButton from "./Questioner/TopicGenerationButton";
 import AnswerBox from './answerbox/AnswerBox';
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import {Link, Route, Routes} from "react-router-dom";
 import Top from "./top/Top";
 import Settings from "./settings/Settings";
 import ExplainBox from './Questioner/ExplainBox';
 import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionConfirm';
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
-import { TextProvider } from './TextContext';
 import Result from "./result/Result";
 
 
 function App() {
     return (
-        <TextProvider>
         <div className="App">
             {/* ヘッダー、すべての画面に表示される*/}
             <header>
@@ -40,7 +37,6 @@ function App() {
                 <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
             </Routes>
         </div>
-        </TextProvider>
     );
 }
 
