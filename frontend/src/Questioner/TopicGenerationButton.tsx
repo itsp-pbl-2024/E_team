@@ -27,14 +27,11 @@ function TopicGenerationButton() {
         }
     };
 
-
     return (
-        <div>
-            <button className="TopicGenerationButton" onClick={GenerateButtonClick} disabled={theme != ""}>お題生成
-            </button>
-            <button className="TopicGenerationButton" onClick={GenerateButtonClick} disabled={theme == ""}>再生成
-            </button>
-            <p className="topic">{theme}</p>
+        <div className="m-6">
+            <div className="text-lg">お題</div>
+            <p className="text-3xl font-bold">{theme}  <a onClick={() => GenerateButtonClick()}>⚙</a> </p>
+            <div className="text-lg">を当ててもらおう</div>
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import '../App.css';
+import './players.css'
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
@@ -60,20 +61,23 @@ function Players() {
         dispatch(setUserList(updatedParticipants))
     };
 
+
     return (
         <div>
-            <h1>トップです</h1>
+            <h1 className='text-2xl m-4'>プレイヤー名を入力してください</h1>
             <div>
                 <input
                     type="text"
                     value={username}
                     onChange={handleInputChange}
+                    className='p-2'
                     placeholder="名前を入力してください"
                 />
-                <button onClick={handleAddParticipant} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button onClick={handleAddParticipant}>
                     追加
                 </button>
             </div>
+
 
             <div>
                 <h2 className='text-xl'>参加者一覧</h2>
@@ -81,29 +85,52 @@ function Players() {
             </div >
             <div>
                 <div className='grid grid-cols-4 gap-4'>
-                    {userList.map((participant, index) => (
+                    {userList.map((participant, index) =>
                         <div key={index} className={'p-4 rounded-md ' + ((participant.role == UserRole.Unassigned) ? "bg-gray-300" : participant.role == UserRole.Explanation ? "bg-red-100" : "bg-green-100")}  >
-                            {participant.username} - {participant.role}
+                            <h2 className='text-xl m-2'>参加者一覧</h2>
                         </div>
-                    ))}
+                    )}
+                    <div>
+                        <div className='grid grid-cols-4 gap-4'>
+                            {userList.map((participant, index) =>
+                                <div key={index} className={'p-4 rounded-md ' + ((participant.role == UserRole.Unassigned) ? "bg-gray-300" : participant.role == UserRole.Explanation ? "bg-red-100" : "bg-green-100")}  >
+                                    {participant.username} - {participant.role}
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <button onClick={assignRole} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                役割を決める
-            </button>
-            <Link to={"/questioner"}>
-                <button className='m-4'
-                    disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length === 0}
-                >
-                    確定する
+                <button onClick={assignRole} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    役割を決める
                 </button>
-            </Link>
+                <Link to={"/questioner"}>
+                    <button className='m-4'
+                        disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length === 0}
+                    >
+                        確定する
+                    </button>
+                </Link>
 
 
-            <Routes>
-                <Route path='/questioner' element={<ExplainBox />} />
-            </Routes>
-        </div >
+                <div>
+                    <button onClick={assignRole} className='m-4'>
+                        役割を決める
+                    </button>
+                    <Link to={"/questioner"}>
+                        <button className='m-4'
+                            disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length === 0}
+                        >
+                            確定する
+                        </button>
+                    </Link>
+
+
+                </div>
+                <Routes>
+                    <Route path='/questioner' element={<ExplainBox />} />
+                </Routes>
+            </div >
+        </div>
     );
 }
 
