@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from util.censor import censor
 # from util.chatgpt import cencor_by_chatgpt
+from util.chatgpt import is_synonym_by_chatgpt
 
 app = FastAPI()
 
@@ -46,6 +47,12 @@ async def censor_text(item: CensorItem):
 # async def censor_text_chatgpt(text: str, theme: str):
 #     censored_text = cencor_by_chatgpt(text, theme)
 #     return {"censored_text": censored_text}
+
+@app.post("/synonym")
+async def is_synonym(answer:str, theme:str):
+    rslt = is_synonym_by_chatgpt(answer, theme)
+    return {"is_synonym": rslt}
+
 
 # pip install uvicorn fastapi
 #  uvicorn main:app --reload で起動

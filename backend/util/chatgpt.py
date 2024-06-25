@@ -20,6 +20,8 @@ def cencor_by_chatgpt(text: str, theme: str):
     )
     return completion.choices[0].message.content
 
+def is_synonym_by_chatgpt(answer: str, theme: str) -> bool:
+    return answer.lower() == theme.lower()
 
 if __name__ == "__main__":
     content = "東工大は大岡山にある大学です。SAOの聖地でもあります。"
