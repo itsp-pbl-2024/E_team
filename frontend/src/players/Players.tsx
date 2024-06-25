@@ -62,7 +62,7 @@ function Players() {
 
     return (
         <div>
-            <h1 className='text-2xl m-4'>プレイヤー名を入力してください</h1>
+            <h1 className='text-2xl'>プレイヤー名を入力してください</h1>
             <div>
                 <input
                     type="text"
@@ -77,7 +77,7 @@ function Players() {
             </div>
 
             <div>
-                <h2 className='text-xl m-2'>参加者一覧</h2>
+                <h2 className='text-xl'>参加者一覧</h2>
 
             </div>
             <div>

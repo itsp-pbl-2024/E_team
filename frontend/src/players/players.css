@@ -13,3 +13,7 @@ button:hover {
 button:disabled {
     @apply bg-gray-200;
 }
+
+div>* {
+    @apply mx-4
+}
