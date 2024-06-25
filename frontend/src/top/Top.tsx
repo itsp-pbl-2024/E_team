@@ -61,6 +61,7 @@ function Top() {
             }
             return {...participant, role: UserRole.Answer};
         });
+
         setParticipants(updatedParticipants);
         dispatch(setUserList(updatedParticipants))
     };
@@ -100,9 +101,6 @@ function Top() {
                     ゲーム開始
                 </button>
             </Link>
-            <Routes>
-                <Route path='/Questioner' element={<ExplainBox/>}/>
-            </Routes>
         </div>
     );
 }
