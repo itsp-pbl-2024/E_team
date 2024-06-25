@@ -7,6 +7,7 @@ import Settings from "./settings/Settings";
 import ExplainBox from './Questioner/ExplainBox';
 import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionConfirm';
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
+import Result from "./result/Settings";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path='/Questioner' element={<ExplainBox/>}/>
                 <Route path='/answerbox' element={<AnswerBox/>}/>
                 <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm/>}/>
+                <Route path='/result' element={<Result/>}/>
                 <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
             </Routes>
         </div>
