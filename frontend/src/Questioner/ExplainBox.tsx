@@ -1,16 +1,18 @@
 import '../App.css';
-import React, { useState } from 'react';
+import React, {useState, useContext} from 'react';
 import TopicGenerationButton from "./TopicGenerationButton";
-import { useSelector } from "react-redux";
-import store, { StateType } from "../app/store";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import {useSelector} from "react-redux";
+import store, {StateType} from "../app/store";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import ToAnswerTransitionConfirm from '../transition_confirm/ToAnswerTransitionConfirm';
+import {TextContext} from '../TextContext';
 
 function ExplainBox() {
     const [explanation, setExplanation] = useState('');
     const [censoredExplanation, setCensoredExplanation] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isClicked, setIsClicked] = useState<Boolean>(false);
+    const textContext = useContext(TextContext);
 
     const theme = useSelector((state: StateType) => state.theme.value)
 
@@ -24,7 +26,7 @@ function ExplainBox() {
             theme: theme,
         };
         try {
-            const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + "/censor", {
+            const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + textContext?.text, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +53,8 @@ function ExplainBox() {
 
     return (
         <div>
-            <TopicGenerationButton />
+            <TopicGenerationButton/>
+            <TopicGenerationButton/>
 
             <div className="flex flex-col items-center p-4">
                 <textarea
@@ -65,12 +68,14 @@ function ExplainBox() {
                     onClick={handleButtonClick}
                     className="flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded mt-2 disabled:bg-gray-500"
                     disabled={!explanation}
-                >検閲する</button>
+                >検閲する
+                </button>
             </div>
 
 
             {errorMessage
-                ? <div className="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">
+                ? <div
+                    className="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">
                     <span className="font-medium">{errorMessage}</span>
                 </div>
                 : <>
@@ -96,7 +101,7 @@ function ExplainBox() {
                 </button>
             </Link>
             <Routes>
-                <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm />} />
+                <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm/>}/>
             </Routes>
 
         </div>
