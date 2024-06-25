@@ -15,7 +15,7 @@ function TopicGenerationButton() {
             dispatch(setTheme(theme))
         }
     };
-    const ReGennerateButtonClick = () => {
+    const ReGenerateButtonClick = () => {
         const theme = topic[Math.floor(Math.random() * topic.length)]
         dispatch(setTheme(theme))
 
@@ -24,7 +24,7 @@ function TopicGenerationButton() {
     return (
         <div>
             <button className="TopicGenerationButton" onClick={GenerateButtonClick} disabled={theme != ""}>お題生成</button>
-            <button className="TopicGenerationButton" onClick={ReGennerateButtonClick} disabled={theme == ""}>再生成</button>
+            <button className="TopicGenerationButton" onClick={ReGenerateButtonClick} disabled={theme == ""}>再生成</button>
             <p className="topic">{theme}</p>
         </div>
     );
