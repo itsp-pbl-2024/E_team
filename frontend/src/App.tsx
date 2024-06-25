@@ -7,10 +7,13 @@ import Settings from "./settings/Settings";
 import ExplainBox from './Questioner/ExplainBox';
 import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionConfirm';
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
-import Result from "./result/Settings";
+import { TextProvider } from './TextContext';
+import Result from "./result/Result";
+
 
 function App() {
     return (
+        <TextProvider>
         <div className="App">
             {/* ヘッダー、すべての画面に表示される*/}
             <header>
@@ -37,6 +40,7 @@ function App() {
                 <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
             </Routes>
         </div>
+        </TextProvider>
     );
 }
 
