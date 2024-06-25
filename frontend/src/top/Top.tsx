@@ -1,3 +1,6 @@
+import '../App.css';
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import ExplainBox from '../Questioner/ExplainBox';
 import React, {useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setUserList } from "../app/redux/userList";
@@ -88,6 +91,14 @@ function Top() {
             <button onClick={assignRole} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 役割を決める
             </button>
+            <Link to={"/Questioner"}>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    ゲーム開始
+                </button>
+            </Link>
+            <Routes>
+                <Route path='/Questioner' element={<ExplainBox/>}/>
+            </Routes>
         </div>
     );
 }
