@@ -1,19 +1,15 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit'
-import {UserRole, UserPropaty} from "../../top/Top"
+import {UserRole, UserProperty} from "../../top/Top"
 
-const initList:UserPropaty[] = []
 
 export const userListSlice = createSlice({
     name: 'userList',
     initialState: {
-        value: "a"//initList
+        value: [] as UserProperty[]
     },
     reducers: {
-        //setUserList: (state, action: PayloadAction<UserPropaty[]>) => {
         setUserList: (state, action) => {
-            console.log(action)
-            //state.value = action.payload;
-            state.value = "b";
+            state.value = action.payload;
         }
     }
 });
