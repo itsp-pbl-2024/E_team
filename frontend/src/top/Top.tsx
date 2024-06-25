@@ -25,21 +25,15 @@ export type UserProperty = {
 
 function Top() {
     const [username, setUsername] = useState<string>('');
-    const [participants, setParticipants] = useState<UserProperty[]>([]);
 
     const dispatch = useDispatch()
     const userList: UserProperty[] = useSelector((state: StateType) => state.userList.value)
 
-    useEffect(() => {
-        setParticipants(userList)
-    }, [])
-
     const handleAddParticipant = () => {
         if (username.trim() !== '') {
             const newParticipant: UserProperty = {username, role: UserRole.Unassigned};
-            const newParticipants = [...participants, newParticipant]
-            setParticipants(newParticipants);
-            dispatch(setUserList(newParticipants))
+
+            dispatch(setUserList([...userList, newParticipant]))
             setUsername('');
         }
     };
@@ -49,20 +43,19 @@ function Top() {
     };
 
     const assignRole = () => {
-        if (participants.length === 0) return;
+        if (userList.length === 0) return;
 
         // 乱数で説明側のインデックスを決定
-        const explanationIndex = Math.floor(Math.random() * participants.length);
+        const explanationIndex = Math.floor(Math.random() * userList.length);
 
         // 説明側と回答側を設定
-        const updatedParticipants = participants.map((participant, index) => {
+        const updatedParticipants = userList.map((participant, index) => {
             if (index === explanationIndex) {
                 return {...participant, role: UserRole.Explanation};
             }
             return {...participant, role: UserRole.Answer};
         });
 
-        setParticipants(updatedParticipants);
         dispatch(setUserList(updatedParticipants))
     };
 
@@ -85,7 +78,7 @@ function Top() {
             <div>
                 <h2>参加者一覧</h2>
                 <ul>
-                    {participants.map((participant, index) => (
+                    {userList.map((participant, index) => (
                         <li key={index}>
                             {participant.username} - {participant.role}
                         </li>
