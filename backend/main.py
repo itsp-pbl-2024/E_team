@@ -48,9 +48,13 @@ async def censor_text(item: CensorItem):
 #     censored_text = cencor_by_chatgpt(text, theme)
 #     return {"censored_text": censored_text}
 
+class SynonymItem(BaseModel):
+    answer: str
+    theme: str 
+
 @app.post("/synonym")
-async def is_synonym(answer:str, theme:str):
-    rslt = is_synonym_by_chatgpt(answer, theme)
+async def is_synonym(item: SynonymItem):
+    rslt = is_synonym_by_chatgpt(item.answer, item.theme)
     return {"is_synonym": rslt}
 
 

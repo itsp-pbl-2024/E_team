@@ -18,7 +18,7 @@ function Result() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + "/censor", {
+                const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + "/synonym", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -28,9 +28,9 @@ function Result() {
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data);
-                    if (data == true){
+                    if (data['is_synonym'] == true){
                         setCorrectStatus(CorrectStatus.Correct)
-                    }else if (data == false){
+                    }else if (data['is_synonym'] == false){
                         setCorrectStatus(CorrectStatus.Wrong)
                     }else{
                         console.error('Error checking synonym');
