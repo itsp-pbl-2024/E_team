@@ -38,13 +38,14 @@ def is_synonym_by_chatgpt(answer: str, theme: str) -> bool:
                    }],
     )
     rslt:str = completion.choices[0].message.content
-    #print(rslt)
-    pattern = r'類似度.*?([1-5])'
+    print(rslt)
+    pattern = r'類似性.*?([1-5])'
     for line in rslt.splitlines():
         match = re.search(pattern, line)
+        print(line, match)
         if match:
             number = match.group(1)
-            if number == 5:
+            if int(number) == 5:
                 return True
     return False
 
