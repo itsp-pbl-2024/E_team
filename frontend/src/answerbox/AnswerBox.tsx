@@ -3,7 +3,7 @@ import './AnswerBox.css'
 import {useSelector} from "react-redux";
 import store, {StateType} from "../app/store";
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import ExplainBox from '../Questioner/ExplainBox';
+import ExplainBox from '../questioner/ExplainBox';
 import ToQuestionerTransitionConfirm from '../transition_confirm/ToQuestionerTransitionConfirm';
 
 function AnswerBox() {

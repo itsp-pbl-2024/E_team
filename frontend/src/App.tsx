@@ -1,9 +1,11 @@
 import './App.css';
 import AnswerBox from './answerbox/AnswerBox';
-import {Link, Route, Routes} from "react-router-dom";
-import Top from "./top/Top";
+import TopicGenerationButton from "./questioner/TopicGenerationButton";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import Players from "./players/Players";
+import Home from "./home/Home";
 import Settings from "./settings/Settings";
-import ExplainBox from './Questioner/ExplainBox';
+import ExplainBox from './questioner/ExplainBox';
 import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionConfirm';
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
 import HowTo from './help/HowTo';
@@ -35,12 +37,13 @@ function App() {
 
             {/* パスごとに表示するコンポーネントを変える */}
             <Routes>
-                <Route path='/' element={<Top/>}/>
-                <Route path='/settings' element={<Settings/>}/>
-                <Route path='/Questioner' element={<ExplainBox/>}/>
-                <Route path='/answerbox' element={<AnswerBox/>}/>
-                <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm/>}/>
-                <Route path='/result' element={<Result/>}/>
+                <Route path='/' element={<Home />} />
+                <Route path='/players' element={<Players />} />
+                <Route path='/settings' element={<Settings />} />
+                <Route path='/questioner' element={<ExplainBox />} />
+                <Route path='/answerbox' element={<AnswerBox />} />
+                <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm />} />
+                <Route path='/result' element={<Result />} />
                 <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
                 <Route path='/HowTo' element={<HowTo/>}/>
             </Routes>
