@@ -7,6 +7,7 @@ import Settings from "./settings/Settings";
 import ExplainBox from './Questioner/ExplainBox';
 import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionConfirm';
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
+import HowTo from './help/HowTo';
 import { TextProvider } from './TextContext';
 
 function App() {
@@ -25,6 +26,11 @@ function App() {
                         設定
                     </button>
                 </Link>
+                <Link to={"/HowTo"}>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        ヘルプ
+                    </button>
+                </Link>
             </header>
 
             {/* パスごとに表示するコンポーネントを変える */}
@@ -35,6 +41,7 @@ function App() {
                 <Route path='/answerbox' element={<AnswerBox/>}/>
                 <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm/>}/>
                 <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
+                <Route path='/HowTo' element={<HowTo/>}/>
             </Routes>
         </div>
         </TextProvider>
