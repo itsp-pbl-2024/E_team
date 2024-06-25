@@ -54,21 +54,21 @@ function ExplainBox() {
     return (
         <div>
             <p>{textContext?.text}</p>
-        <TopicGenerationButton />
+            <TopicGenerationButton />
 
-        <div className="flex flex-col items-center p-4">
-            <textarea
-                value={explanation}
-                onChange={handleInputChange}
-                // className="border rounded p-4 md:w-96 h-32 "
-                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Input explanation"
-            />
-            <button
-                onClick={handleButtonClick}
-                className="flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded mt-2"
-            >検閲する</button>
-        </div>
+            <div className="flex flex-col items-center p-4">
+                <textarea
+                    value={explanation}
+                    onChange={handleInputChange}
+                    // className="border rounded p-4 md:w-96 h-32 "
+                    className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Input explanation"
+                />
+                <button
+                    onClick={handleButtonClick}
+                    className="flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded mt-2"
+                >検閲する</button>
+            </div>
         
 
         {errorMessage
