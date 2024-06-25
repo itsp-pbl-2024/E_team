@@ -1,7 +1,6 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit'
 import {UserRole, UserProperty} from "../../top/Top"
 
-
 export const userListSlice = createSlice({
     name: 'userList',
     initialState: {

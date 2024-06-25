@@ -25,7 +25,7 @@ export type UserProperty = {
 
 function Top() {
     const [username, setUsername] = useState<string>('');
-
+  
     const dispatch = useDispatch()
     const userList: UserProperty[] = useSelector((state: StateType) => state.userList.value)
 
