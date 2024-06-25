@@ -33,7 +33,6 @@ function HowTo() {
         </div>
     );
 }
-
 // スタイルオブジェクトをCSSProperties型で定義
 const containerStyle: CSSProperties = {
     padding: '20px',
