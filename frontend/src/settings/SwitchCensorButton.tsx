@@ -1,40 +1,32 @@
-import React, { useState, useContext } from 'react';
-import { TextContext } from '../TextContext';
+import React, {useState, useContext} from 'react';
+import {TextContext} from '../TextContext';
+import {useDispatch, useSelector} from "react-redux";
+import {StateType} from "../app/store";
+import {CensorType, CensorTypes, setCensorType} from "../app/redux/censorType";
 
 function SwitchButton() {
-    const [endpoint, setEndpoint] = useState('/censor');
-    const textContext = useContext(TextContext);
-    const [currentCensor, setCurrentCensor] = useState(() => {
-        if (textContext?.text === '/censor') {
-            return 'spaCy';
-        } else if (textContext?.text === '/censor/chatgpt') {
-            return 'chatGPT';
-        } else {
-            return '未設定';
-        }
-    });
+    const dispatch = useDispatch()
+    const censorType: CensorType = useSelector((state: StateType) => state.censorType.value)
 
-    const handleSwitch = (newEndpoint: string) => {
-        setEndpoint(newEndpoint);
-        textContext?.setText(newEndpoint);
-        setCensor(newEndpoint);
+    const handleSwitch = (ctype: CensorType) => {
+        dispatch(setCensorType(ctype))
     };
-    
-    const setCensor = (newEndpoint: string) =>{
-        if (newEndpoint=="/censor"){
-            setCurrentCensor("spaCy");
-        } else if (newEndpoint=="/censor/chatgpt"){
-            setCurrentCensor("chatGPT");
-        }
-    };
+
 
     return (
         <div>
             <a>検閲官を選択 : </a>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleSwitch('/censor')}>spaCy</button>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleSwitch('/censor/chatgpt')}>chatGPT</button>
-            <p>現在の検閲官 : {currentCensor}</p>
-            <p>Current endpoint: {endpoint}</p>
+            {
+                CensorTypes.map((v) =>
+                    <>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                onClick={() => handleSwitch(v)}>{v.label}
+                        </button>
+                    </>
+                )
+            }
+            <p>現在の検閲官 : {censorType.label}</p>
+            <p>Current endpoint: {censorType.path}</p>
         </div>
     );
 }
