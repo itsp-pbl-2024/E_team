@@ -1,10 +1,10 @@
 import '../App.css';
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import ExplainBox from '../Questioner/ExplainBox';
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {setUserList} from "../app/redux/userList";
-import store, {StateType} from "../app/store";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { setUserList } from "../app/redux/userList";
+import store, { StateType } from "../app/store";
 
 /**
  * ユーザーの役割の列挙型
@@ -23,7 +23,7 @@ export type UserProperty = {
     role: UserRole;
 }
 
-function Top() {
+function Players() {
     const [username, setUsername] = useState<string>('');
 
     const dispatch = useDispatch()
@@ -31,7 +31,7 @@ function Top() {
 
     const handleAddParticipant = () => {
         if (username.trim() !== '') {
-            const newParticipant: UserProperty = {username, role: UserRole.Unassigned};
+            const newParticipant: UserProperty = { username, role: UserRole.Unassigned };
 
             dispatch(setUserList([...userList, newParticipant]))
             setUsername('');
@@ -51,9 +51,9 @@ function Top() {
         // 説明側と回答側を設定
         const updatedParticipants = userList.map((participant, index) => {
             if (index === explanationIndex) {
-                return {...participant, role: UserRole.Explanation};
+                return { ...participant, role: UserRole.Explanation };
             }
-            return {...participant, role: UserRole.Answer};
+            return { ...participant, role: UserRole.Answer };
         });
 
         dispatch(setUserList(updatedParticipants))
@@ -70,7 +70,7 @@ function Top() {
                     placeholder="名前を入力してください"
                 />
                 <button onClick={handleAddParticipant}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     追加
                 </button>
             </div>
@@ -86,16 +86,19 @@ function Top() {
                 </ul>
             </div>
             <button onClick={assignRole}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 役割を決める
             </button>
-            <Link to={"/Questioner"}>
+            <Link to={"/questioner"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    ゲーム開始
+                    確定する
                 </button>
             </Link>
+            <Routes>
+                <Route path='/questioner' element={<ExplainBox />} />
+            </Routes>
         </div>
     );
 }
 
-export default Top;
+export default Players;
