@@ -1,7 +1,8 @@
+import {useState} from "react";
 import './TopicGenerationButton.css'
 import {useDispatch, useSelector} from "react-redux";
-import ThemeReducer, {setTheme} from "../app/redux/theme";
-import store, {StateType} from "../app/store";
+import {setTheme} from "../app/redux/theme";
+import {StateType} from "../app/store";
 
 function TopicGenerationButton() {
     const dispatch = useDispatch()
@@ -25,11 +26,18 @@ function TopicGenerationButton() {
             console.error('Error fetching data:', error);
         }
     };
+
+    const ReGenerateButtonClick = () => {
+        const theme = topic[Math.floor(Math.random() * topic.length)]
+        dispatch(setTheme(theme))
+
+    }
+
     return (
         <div>
             <button className="TopicGenerationButton" onClick={GenerateButtonClick} disabled={theme != ""}>お題生成
             </button>
-            <button className="TopicGenerationButton" onClick={GenerateButtonClick} disabled={theme == ""}>再生成
+            <button className="TopicGenerationButton" onClick={ReGenerateButtonClick} disabled={theme == ""}>再生成
             </button>
             <p className="topic">{theme}</p>
         </div>
