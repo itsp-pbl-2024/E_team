@@ -1,11 +1,12 @@
 import '../App.css';
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import ExplainBox from '../Questioner/ExplainBox';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setUserList } from "../app/redux/userList";
 import store, { StateType } from "../app/store";
 
+import './players.css'
+import ExplainBox from '../questioner/ExplainBox';
 /**
  * ユーザーの役割の列挙型
  */
@@ -61,39 +62,47 @@ function Players() {
 
     return (
         <div>
-            <h1>トップです</h1>
+            <h1 className='text-2xl'>プレイヤー名を入力してください</h1>
             <div>
                 <input
                     type="text"
                     value={username}
                     onChange={handleInputChange}
+                    className='p-2'
                     placeholder="名前を入力してください"
                 />
-                <button onClick={handleAddParticipant}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button onClick={handleAddParticipant}>
                     追加
                 </button>
             </div>
 
             <div>
-                <h2>参加者一覧</h2>
-                <ul>
-                    {userList.map((participant, index) => (
-                        <li key={index}>
-                            {participant.username} - {participant.role}
-                        </li>
-                    ))}
-                </ul>
+                <h2 className='text-xl'>参加者一覧</h2>
+
             </div>
-            <button onClick={assignRole}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                役割を決める
-            </button>
-            <Link to={"/questioner"}>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    確定する
+            <div>
+                <div className='grid grid-cols-4 gap-4'>
+                    {userList.map((participant, index) => (
+                        <div key={index} className={'p-4 rounded-md ' + ((participant.role == UserRole.Unassigned) ? "bg-gray-300" : participant.role == UserRole.Explanation ? "bg-red-100" : "bg-green-100")}  >
+                            {participant.username} - {participant.role}
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div>
+                <button onClick={assignRole} className='m-4'>
+                    役割を決める
                 </button>
-            </Link>
+                <Link to={"/questioner"}>
+                    <button className='m-4'
+                        disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length === 0}
+                    >
+                        確定する
+                    </button>
+                </Link>
+
+
+            </div>
             <Routes>
                 <Route path='/questioner' element={<ExplainBox />} />
             </Routes>
