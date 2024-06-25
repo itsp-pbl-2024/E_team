@@ -1,11 +1,9 @@
 import '../App.css';
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import TopicGenerationButton from "./TopicGenerationButton";
 import {useSelector} from "react-redux";
-import store, {StateType} from "../app/store";
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import ToAnswerTransitionConfirm from '../transition_confirm/ToAnswerTransitionConfirm';
-import {TextContext} from '../TextContext';
+import {StateType} from "../app/store";
+import {Link} from "react-router-dom";
 import {CensorType} from "../app/redux/settings";
 
 function ExplainBox() {
