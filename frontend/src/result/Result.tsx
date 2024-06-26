@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import {StateType} from "../app/store";
 import {Link} from "react-router-dom";
 
 enum CorrectStatus {
@@ -10,8 +12,38 @@ enum CorrectStatus {
 function Result() {
 
     const [correctStatus, setCorrectStatus] = useState<CorrectStatus>(CorrectStatus.Processing)
+    const theme = useSelector((state: StateType) => state.theme.value)
+    const answer = "キャンプファイヤー"
 
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + "/synonym", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({theme, answer}),
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data);
+                    if (data['is_synonym'] == true){
+                        setCorrectStatus(CorrectStatus.Correct)
+                    }else if (data['is_synonym'] == false){
+                        setCorrectStatus(CorrectStatus.Wrong)
+                    }else{
+                        console.error('Error checking synonym');
+                    }
+                } else {
+                    console.error('Error checking synonym');
+                }
+            } catch (error) {
+                console.error('Error checking synonym:', error);
+            }
+        };
+
+        fetchData();
     }, [])
 
     return (
