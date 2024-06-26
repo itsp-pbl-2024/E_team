@@ -1,16 +1,15 @@
 import './App.css';
-import TopicGenerationButton from "./questioner/TopicGenerationButton";
 import AnswerBox from './answerbox/AnswerBox';
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import { Link, Route, Routes, Outlet, useLocation } from "react-router-dom";
 import Players from "./players/Players";
 import Home from "./home/Home";
 import Settings from "./settings/Settings";
 import ExplainBox from './questioner/ExplainBox';
 import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionConfirm';
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
-import Result from "./result/Settings";
-import { Outlet, useLocation } from 'react-router-dom';
-import { ReactNode } from "react";
+import HowTo from './help/HowTo';
+import Result from "./result/Result";
+
 
 const Layout = ({ hideHeaderPaths = [] }: {hideHeaderPaths: string[]}) => {
     const { pathname } = useLocation();
@@ -28,6 +27,11 @@ const Layout = ({ hideHeaderPaths = [] }: {hideHeaderPaths: string[]}) => {
                             設定
                         </button>
                     </Link>
+                    <Link to={"/HowTo"}>
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        ヘルプ
+                    </button>
+                </Link>
                 </header>
             }
             <Outlet/>
@@ -48,6 +52,7 @@ export default function App() {
                     <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm/>}/>
                     <Route path='/result' element={<Result/>}/>
                     <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
+                    <Route path='/HowTo' element={<HowTo/>}/>
                 </Route>
             </Routes>
         </div>
