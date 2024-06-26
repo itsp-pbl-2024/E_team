@@ -1,10 +1,11 @@
 import '../App.css';
-import React, {useState} from 'react';
+import { useSelector } from "react-redux";
+import { StateType } from "../app/store";
+import { CensorType } from "../app/redux/settings";
+import React, { useState, useContext } from 'react';
 import TopicGenerationButton from "./TopicGenerationButton";
-import {useSelector} from "react-redux";
-import {StateType} from "../app/store";
-import {Link} from "react-router-dom";
-import {CensorType} from "../app/redux/settings";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import ToAnswerTransitionConfirm from '../transition_confirm/ToAnswerTransitionConfirm';
 
 function ExplainBox() {
     const [explanation, setExplanation] = useState('');
@@ -51,8 +52,9 @@ function ExplainBox() {
     };
 
     return (
+
         <div>
-            <TopicGenerationButton/>
+            <TopicGenerationButton />
 
             <div className="flex flex-col items-center p-4">
                 <textarea
