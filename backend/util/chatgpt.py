@@ -6,15 +6,18 @@ import re
 #     project="proj_LApVUeX69juOsNm9f5WrZENZ",
 # )
 
-def cencor_by_chatgpt(text: str, theme: str):
+def censor_by_chatgpt(text: str, theme: str):
     client = OpenAI()
     completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        # model="gpt-3.5-turbo",
+        # model="gpt-4o",
+            model="gpt-4-turbo",
         messages=[{"role": "user",
-                   "content": f"これからあなたにある単語についての説明文を渡します。"
-                              f"あなたの役割は、説明文を検閲し、なんの単語について説明しているかわかりにくくすることです。"
-                              f"ゲームを楽しくするため、何を説明しているかわかりにくくなるようにしてください。"
-                              f"次の文章に関して、{theme}と推測されそうな言葉すべてを-に置き換えて返信してください。\n\n"
+                   "content": f"これからあなたに{theme}について説明した文を渡します。"
+                              f"あなたの役割は、説明文を検閲し、{theme}について説明していることを悟らせないことです。"
+                              f"ゲームを楽しくするため、適度に検閲してください。特に、固有名詞、地名、人名など、かなり推測されやすくなる情報は消してください。"
+                            #   f"次の文章に関して、{theme}と推測されそうな言葉すべてを-に置き換えて返信してください。"
+                              f"なお、どんな場合でも{theme}を含めた返信をしないでください。検閲後の文章のみを返事してください。\n\n"
                               f"{text}"
                    }],
     )
@@ -50,7 +53,11 @@ def is_synonym_by_chatgpt(answer: str, theme: str) -> bool:
     return False
 
 if __name__ == "__main__":
-    content = "東工大は大岡山にある大学です。SAOの聖地でもあります。"
-    theme = "東京工業大学"
+    content="""目黒区にある地名です
+近くに東京工業大学があります
+"""
+    theme = "大岡山"
+    # content = "東工大は大岡山にある大学です。SAOの聖地でもあります。"
+    # theme = "東京工業大学"
 
-    print(cencor_by_chatgpt(content, theme))
+    print(censor_by_chatgpt(content, theme))
