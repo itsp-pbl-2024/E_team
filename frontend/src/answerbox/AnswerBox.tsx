@@ -13,6 +13,7 @@ function AnswerBox() {
     const [isTransitionButtonDisabled, setIsTransitionButtonDisabled] = useState(false);
 
     const theme = useSelector((state: StateType) => state.history.value.currentStatus.theme)
+    const censoredExplanation = useSelector((state: StateType) => state.history.value.currentStatus.censored_explanations).at(-1)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
@@ -33,7 +34,7 @@ function AnswerBox() {
             <div className="bg-emerald-200 p-2">回答者</div>
             <div className="m-10 max-h-60 overflow-y-scroll border p-1">
                 {/*    検閲された文章 */}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Malesuada bibendum arcu vitae elementum. Lobortis scelerisque fermentum dui faucibus in. Ut etiam sit amet nisl purus in mollis nunc sed. Nu******* tortor at auctor urna nunc. Eleifend mi in null*******. Nascetur ridiculus mus mauris vitae ultricies. Ac auctor augue mauris augue ****** gravida in fermentum et. Scelerisque varius morbi enim nunc faucibus a. In eu mi*******quam id diam. Scelerisque eu ultrices vitae auctor eu augue ut lectus arcu. Cras sed felis eget velit aliquet sagittis id consectetur. Varius sit amet mattis vulputate enim nulla aliquet porttitor lacus.vitae ultricies. Ac auctor augue mauris augue ****** gravida in fermentum et. Scelerisque varius morbi enim nunc faucibus a. In eu mi*******quam id diam. Scelerisque eu ultrices vitae auctor eu augue ut lectus arcu. Cras sed felis eget
+                {censoredExplanation}
             </div>
             <input
                 type="text"

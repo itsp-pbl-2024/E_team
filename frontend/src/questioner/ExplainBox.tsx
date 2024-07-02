@@ -6,17 +6,16 @@ import React, {useState, useContext} from 'react';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import TopicGenerationButton from "./TopicGenerationButton";
 import {UserProperty} from "../players/Players";
-import {confirmExplanation, confirmTheme, updateExplanation} from "../app/redux/history";
+import {appendCensoredExplanation, confirmExplanation, confirmTheme, updateExplanation} from "../app/redux/history";
 
 function ExplainBox() {
-    const explanation = useSelector((state: StateType) => state.history.value.currentStatus.tmp_explanation)
     const [censoredExplanation, setCensoredExplanation] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [isClicked, setIsClicked] = useState<Boolean>(false);
-    const censorType: CensorType = useSelector((state: StateType) => state.settings.value.censorType)
 
     const dispatch = useDispatch()
     const theme = useSelector((state: StateType) => state.history.value.currentStatus.theme)
+    const explanation = useSelector((state: StateType) => state.history.value.currentStatus.tmp_explanation)
+    const censorType: CensorType = useSelector((state: StateType) => state.settings.value.censorType)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         dispatch(updateExplanation(event.target.value))
@@ -27,7 +26,7 @@ function ExplainBox() {
         dispatch(confirmExplanation())
     }
 
-    const handleButtonClick = async () => {
+    const censorExplination = async () =>{
         const requestBody = {
             text: explanation,
             theme: theme,
@@ -44,6 +43,7 @@ function ExplainBox() {
                 const data = await response.json();
                 console.log(data);
                 setCensoredExplanation(data['censored_text']);
+                dispatch(appendCensoredExplanation(data['censored_text']))
                 setErrorMessage(null);
             } else {
                 const errorData = await response.json();
@@ -54,8 +54,7 @@ function ExplainBox() {
             console.error('Error fetching data:', error);
             setErrorMessage('Error fetching data')
         }
-        setIsClicked(true);
-    };
+    }
 
     return (
         <div>
@@ -68,40 +67,26 @@ function ExplainBox() {
                     className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Input explanation"
                 />
-                <button
-                    onClick={handleButtonClick}
-                    className="flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded mt-2 disabled:bg-gray-500"
-                    disabled={!explanation}
-                >検閲する
-                </button>
             </div>
-
 
             {errorMessage
                 ? <div
                     className="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">
                     <span className="font-medium">{errorMessage}</span>
                 </div>
-                : <>
-                    {isClicked && <>
-                        <h2 className="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">
-                            平文
-                        </h2>
-                        <p>{explanation}</p>
-                        <h2 className="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">
-                            検閲済
-                        </h2>
-                        <p>{censoredExplanation}</p>
-
-                    </>}
-                </>
-
-
+                : <></>
             }
             <Link to={"/to_answer_transition_confirm"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={confirm}>
-                    回答者画面へ
+                        onClick={() =>{
+                            confirm();
+                            censorExplination();
+                        }}
+                        //className="flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded mt-2 disabled:bg-gray-500"
+                        disabled={!explanation}
+                        //onClick={handleButtonClick}
+                        >
+                    確定する
                 </button>
             </Link>
         </div>
