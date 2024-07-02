@@ -35,7 +35,11 @@ export const historySlice = createSlice({
             state.value.themeHistories = [...state.value.themeHistories, state.value.currentStatus as ThemeHistory]
             state.value.currentStatus = {
                 theme: action.payload,
-                theme_confirmed: false
+                theme_confirmed: false,
+                tmp_explanation: "",
+                explanations: [],
+                censored_explanations: [],
+                answers: [],
             } as CurrentTheme
         },
         confirmTheme: (state) => {
