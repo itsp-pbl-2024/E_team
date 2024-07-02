@@ -9,23 +9,18 @@ import {appendCensoredExplanation, confirmExplanation, confirmTheme, updateExpla
 
 function ExplainBox() {
     const dispatch = useDispatch()
-    const theme = useSelector((state: StateType) => state.history.value.currentStatus.theme)
-    const explanation = useSelector((state: StateType) => state.history.value.currentStatus.tmp_explanation)
+    const theme = useSelector((state: StateType) => state.history.value.currentGameStatus.theme)
+    const explanation = useSelector((state: StateType) => state.history.value.currentGameStatus.tmp_explanation)
     const censorType: CensorType = useSelector((state: StateType) => state.settings.value.censorType)
+
 
     const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         dispatch(updateExplanation(event.target.value))
     };
 
-    const confirm = () => {
-        dispatch(confirmTheme())
-        dispatch(confirmExplanation())
-    }
-
     const censorExplanation = async () => {
         dispatch(confirmTheme())
         dispatch(confirmExplanation())
-
         const requestBody = {
             text: explanation,
             theme: theme,
@@ -65,14 +60,9 @@ function ExplainBox() {
 
             <Link to={"/to_answer_transition_confirm"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() =>{
-                            confirm();
-                            censorExplanation();
-                        }}
-                        //className="flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded mt-2 disabled:bg-gray-500"
+                        onClick={censorExplanation}
                         disabled={!explanation}
-                        //onClick={handleButtonClick}
-                        >
+                >
                     確定する
                 </button>
             </Link>

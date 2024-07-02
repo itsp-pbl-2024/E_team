@@ -11,18 +11,13 @@ import HowTo from './help/HowTo';
 import Result from "./result/Result";
 import Correct from './result/Correct';
 import Wrong from './result/Wrong';
-
-
-const Layout = ({ hideHeaderPaths = [] }: {hideHeaderPaths: string[]}) => {
-    const { pathname } = useLocation();
-import Correct from './result/Correct';
-import Wrong from './result/Wrong';
 import {useDispatch} from "react-redux";
 import {resetCurrentGame} from "./app/redux/history";
 
 
 const Layout = ({hideHeaderPaths = []}: { hideHeaderPaths: string[] }) => {
     const {pathname} = useLocation();
+
     const dispatch = useDispatch()
 
     const reset = () => {
@@ -71,6 +66,7 @@ export default function App() {
                     <Route path='/HowTo' element={<HowTo/>}/>
                     <Route path='/correct' element={<Correct/>}/>
                     <Route path='/wrong' element={<Wrong/>}/>
+                </Route>
             </Routes>
         </div>
     );

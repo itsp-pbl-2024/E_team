@@ -8,11 +8,8 @@ import {appendAnswer} from "../app/redux/history";
 function AnswerBox() {
     const [userAnswer, setUserAnswer] = useState('');
 
-
-    const theme = useSelector((state: StateType) => state.history.value.currentGameStatus.theme)
     const dispatch = useDispatch()
     const censoredExplanation = useSelector((state: StateType) => state.history.value.currentGameStatus.censored_explanations).at(-1)
-
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
@@ -27,7 +24,7 @@ function AnswerBox() {
             <div className="bg-emerald-200 p-2">回答者</div>
             <div className="m-10 max-h-60 overflow-y-scroll border p-1">
                 {/*    検閲された文章 */}
-                {/*{censoredExplanation}*/}
+                {censoredExplanation}
             </div>
             <input
                 type="text"
@@ -44,7 +41,7 @@ function AnswerBox() {
             {/*)}*/}
             <Link to={"/result"}>
                 <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-                        disabled={isTransitionButtonDisabled}>
+                        onClick={confirm}>
                     確定する
                 </button>
             </Link>

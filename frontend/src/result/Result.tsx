@@ -48,9 +48,9 @@ function Result() {
 
     return (
         <>
-            {/* <button onClick={() => {setCorrectStatus(CorrectStatus.Correct)}}>
-                correct
-            </button> */}
+             <button onClick={checkAnswer}>
+                correct?
+            </button>
             <Link to={"/correct"}>
                 <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
                     正解画面
@@ -65,7 +65,9 @@ function Result() {
                     不正解画面
                 </button>
             </Link>
-            <button onClick={() => {setCorrectStatus(CorrectStatus.Processing)}}>
+            <button onClick={() => {
+                setCorrectStatus(CorrectStatus.Processing)
+            }}>
                 processing
             </button>
             {correctStatus == CorrectStatus.Correct &&
