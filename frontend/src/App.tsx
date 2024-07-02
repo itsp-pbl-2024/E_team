@@ -9,6 +9,8 @@ import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionCo
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
 import HowTo from './help/HowTo';
 import Result from "./result/Result";
+import Correct from './result/Correct';
+import Wrong from './result/Wrong';
 
 
 const Layout = ({ hideHeaderPaths = [] }: {hideHeaderPaths: string[]}) => {
@@ -53,6 +55,8 @@ export default function App() {
                     <Route path='/result' element={<Result/>}/>
                     <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
                     <Route path='/HowTo' element={<HowTo/>}/>
+                    <Route path='/correct' element={<Correct/>}/>
+                    <Route path='/wrong' element={<Wrong/>}/>
                 </Route>
             </Routes>
         </div>
