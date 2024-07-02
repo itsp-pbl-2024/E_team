@@ -13,9 +13,7 @@ function AnswerBox() {
     const [isTransitionButtonDisabled, setIsTransitionButtonDisabled] = useState(false);
 
     const theme = useSelector((state: StateType) => state.history.value.currentStatus.theme)
-    // Reduxに合わせて変更
-    const explanation = useSelector((state: StateType) => state.history.value.currentStatus.explanations)
-    const censoredExplanation = useSelector((state: StateType) => state.history.value.currentStatus.censored_explanations)
+    const censoredExplanation = useSelector((state: StateType) => state.history.value.currentStatus.censored_explanations).at(-1)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
