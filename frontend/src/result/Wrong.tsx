@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { StateType } from "../app/store";
 
 const styles = {
   container: {
@@ -23,8 +25,10 @@ const styles = {
 };
 
 function Wrong () {
+  const theme = useSelector((state: StateType) => state.theme.value)
     return (
         <div>
+            <div className="bg-gradient-to-r from-emerald-200 to-red-300 p-2">回答者→出題者</div>
             <div className='m-6'>
                 <p className="text-3xl font-bold">残念！</p>
             </div>
@@ -33,7 +37,7 @@ function Wrong () {
             </div>
             <div className='m-6'>
                 <p>今回の解答</p>
-                <p className="text-3xl font-bold">東京工業大学</p>
+                <p className="text-3xl font-bold">{theme}</p>
             </div>
             <Link to={"/to_questioner_transition_confirm"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
