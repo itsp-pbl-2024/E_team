@@ -1,6 +1,6 @@
 import './App.css';
 import AnswerBox from './answerbox/AnswerBox';
-import { Link, Route, Routes, Outlet, useLocation } from "react-router-dom";
+import {Link, Route, Routes, Outlet, useLocation} from "react-router-dom";
 import Players from "./players/Players";
 import Home from "./home/Home";
 import Settings from "./settings/Settings";
@@ -9,15 +9,36 @@ import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionCo
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
 import HowTo from './help/HowTo';
 import Result from "./result/Result";
+<<<<<<< HEAD
+import {useDispatch, useSelector} from "react-redux";
+import {StateType} from "./app/store";
+import {resetCurrentGame} from "./app/redux/history";
 
 
 const Layout = ({ hideHeaderPaths = [] }: {hideHeaderPaths: string[]}) => {
     const { pathname } = useLocation();
+=======
+import Correct from './result/Correct';
+import Wrong from './result/Wrong';
+import {useDispatch} from "react-redux";
+import {resetCurrentGame} from "./app/redux/history";
+
+
+const Layout = ({hideHeaderPaths = []}: { hideHeaderPaths: string[] }) => {
+    const {pathname} = useLocation();
+>>>>>>> d6dc22a77982cc96806ed3b84ab78ee5d54638c6
+
+    const dispatch = useDispatch()
+
+    const reset = () => {
+        dispatch(resetCurrentGame())
+    }
+
     return (
         <>
             {!hideHeaderPaths.includes(pathname) &&
                 <header>
-                    <Link to={"/"}>
+                    <Link to={"/"} onClick={reset}>
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Home
                         </button>
@@ -28,10 +49,10 @@ const Layout = ({ hideHeaderPaths = [] }: {hideHeaderPaths: string[]}) => {
                         </button>
                     </Link>
                     <Link to={"/HowTo"}>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        ヘルプ
-                    </button>
-                </Link>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            ヘルプ
+                        </button>
+                    </Link>
                 </header>
             }
             <Outlet/>
@@ -53,6 +74,8 @@ export default function App() {
                     <Route path='/result' element={<Result/>}/>
                     <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
                     <Route path='/HowTo' element={<HowTo/>}/>
+                    <Route path='/correct' element={<Correct/>}/>
+                    <Route path='/wrong' element={<Wrong/>}/>
                 </Route>
             </Routes>
         </div>

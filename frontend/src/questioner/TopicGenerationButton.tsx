@@ -6,8 +6,10 @@ import {changeTheme} from "../app/redux/history";
 
 function TopicGenerationButton() {
     const dispatch = useDispatch()
-    const theme = useSelector((state: StateType) => state.history.value.currentStatus.theme)
+    const theme = useSelector((state: StateType) => state.history.value.currentGameStatus.theme)
+    const theme_confirmed = useSelector((state: StateType) => state.history.value.currentGameStatus.theme_confirmed)
     const GenerateButtonClick = async () => {
+        if (theme_confirmed) return
         try {
             const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + "/theme", {
                 method: 'GET',
@@ -30,7 +32,7 @@ function TopicGenerationButton() {
     return (
         <div className="m-6">
             <div className="text-lg">お題</div>
-            <p className="text-3xl font-bold">{theme} <a onClick={() => GenerateButtonClick()}>⚙</a></p>
+            <p className="text-3xl font-bold">{theme} <a onClick={GenerateButtonClick}>⚙</a></p>
             <div className="text-lg">を当ててもらおう</div>
         </div>
     );

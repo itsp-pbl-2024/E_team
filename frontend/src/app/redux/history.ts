@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-export type CurrentTheme = {
+export type CurrentGame = {
     theme: string,
     theme_confirmed: boolean,
     tmp_explanation: string,
@@ -18,46 +18,54 @@ export type ThemeHistory = {
 }
 
 export type HistoryType = {
-    currentStatus: CurrentTheme,
+    currentGameStatus: CurrentGame,
     themeHistories: ThemeHistory[],
 }
+
+const initialGame = {
+    theme: "",
+    theme_confirmed: false,
+    tmp_explanation: "",
+    explanations: [],
+    censored_explanations: [],
+    answers: [],
+} as CurrentGame
 
 export const historySlice = createSlice({
     name: 'history',
     initialState: {
         value: {
-            currentStatus: {} as CurrentTheme,
-            themeHistories: [] as CurrentTheme[],
+            currentGameStatus: initialGame,
+            themeHistories: [] as CurrentGame[],
         } as HistoryType
     },
     reducers: {
         changeTheme: (state, action) => {
-            state.value.themeHistories = [...state.value.themeHistories, state.value.currentStatus as ThemeHistory]
-            state.value.currentStatus = {
-                theme: action.payload,
-                theme_confirmed: false,
-                tmp_explanation: "",
-                explanations: [],
-                censored_explanations: [],
-                answers: [],
-            } as CurrentTheme
+            state.value.currentGameStatus.theme = action.payload
+            state.value.currentGameStatus.theme_confirmed = false
         },
         confirmTheme: (state) => {
-            state.value.currentStatus.theme_confirmed = true
+            state.value.currentGameStatus.theme_confirmed = true
         },
         confirmExplanation: (state) => {
-            state.value.currentStatus.explanations = [...state.value.currentStatus.explanations, state.value.currentStatus.tmp_explanation]
-            state.value.currentStatus.tmp_explanation = ""
+            state.value.currentGameStatus.explanations = [...state.value.currentGameStatus.explanations, state.value.currentGameStatus.tmp_explanation]
+            state.value.currentGameStatus.tmp_explanation = ""
         },
         updateExplanation: (state, action) => {
-            state.value.currentStatus.tmp_explanation = action.payload
+            state.value.currentGameStatus.tmp_explanation = action.payload
         },
         appendCensoredExplanation: (state, action) => {
-            state.value.currentStatus.censored_explanations = [...state.value.currentStatus.censored_explanations, action.payload]
+            state.value.currentGameStatus.censored_explanations = [...state.value.currentGameStatus.censored_explanations, action.payload]
         },
         appendAnswer: (state, action) => {
-            state.value.currentStatus.answers = [...state.value.currentStatus.answers, action.payload]
+            state.value.currentGameStatus.answers = [...state.value.currentGameStatus.answers, action.payload]
         },
+        finishCurrentGame: (state) => {
+            state.value.themeHistories = [...state.value.themeHistories, state.value.currentGameStatus as ThemeHistory]
+        },
+        resetCurrentGame: (state) => {
+            state.value.currentGameStatus = initialGame
+        }
     }
 })
 
@@ -67,7 +75,9 @@ export const {
     confirmExplanation,
     updateExplanation,
     appendCensoredExplanation,
-    appendAnswer
+    appendAnswer,
+    finishCurrentGame,
+    resetCurrentGame,
 } = historySlice.actions
 
 export default historySlice.reducer
