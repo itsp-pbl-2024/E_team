@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import store, { StateType } from "../app/store";
 
 
-import { CensorTypes, setCensorType } from "../app/redux/settings";
+import { CensorTypes, setCensorType, setVolume } from "../app/redux/settings";
 
 function Settings() {
 
@@ -13,19 +13,19 @@ function Settings() {
     const navigate = useNavigate()
 
     const cencerType = useSelector((state: StateType) => state.settings.value)
-    const [volume, setVolume] = useState(50);
 
+    console.log(cencerType.censorType.label)
     const handleClose = () => {
         navigate(-1)
     }
     const volumeHandle = (e: any) => {
-        const value = e.target.value;
-        setVolume(value);
+        dispatch(setVolume(e.target.value))
     }
 
     const resetSetings = () => {
         dispatch(setCensorType(CensorTypes.chatgpt))
-        setVolume(50)
+        dispatch(setVolume(50))
+
     }
 
     const cencerTypeHandler = (e: any) => {
@@ -60,7 +60,7 @@ function Settings() {
                     <label className="block text-gray-700">音量</label>
                 </div>
                 <div className="w-1/4">
-                    <input type="range" className="w-3/4" value={volume} onChange={volumeHandle} />
+                    <input type="range" className="w-3/4" value={cencerType.volume} onChange={volumeHandle} />
                 </div>
             </div>
 
