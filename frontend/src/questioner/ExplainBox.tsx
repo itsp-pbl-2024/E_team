@@ -63,40 +63,23 @@ function ExplainBox() {
                     className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Input explanation"
                 />
-                <button
-                    onClick={handleButtonClick}
-                    className="flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded mt-2 disabled:bg-gray-500"
-                    disabled={!explanation}
-                >検閲する
-                </button>
             </div>
-
 
             {errorMessage
                 ? <div
                     className="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300">
                     <span className="font-medium">{errorMessage}</span>
                 </div>
-                : <>
-                    {isClicked && <>
-                        <h2 className="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">
-                            平文
-                        </h2>
-                        <p>{explanation}</p>
-                        <h2 className="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl dark:text-white">
-                            検閲済
-                        </h2>
-                        <p>{censoredExplanation}</p>
-
-                    </>}
-                </>
-
-
+                : <></>
             }
 
             <Link to={"/to_answer_transition_confirm"}>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    回答者画面へ
+                <button 
+                    // className="flex flex-col bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded mt-2 disabled:bg-gray-500"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={handleButtonClick}
+                    disabled={!explanation}
+                >確定する
                 </button>
             </Link>
         </div>
