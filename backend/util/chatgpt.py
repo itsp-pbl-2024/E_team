@@ -26,7 +26,8 @@ def censor_by_chatgpt(text: str, theme: str):
 def is_synonym_by_chatgpt(answer: str, theme: str) -> bool:
     client = OpenAI()
     completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4-turbo",
+        # model="gpt-3.5-turbo",
         messages=[{"role": "user",
                    "content": f"2つの単語の類似性を1~5で評価してください。簡単な理由を述べ、「類似性:<1~5>」という形式で回答してください\n"
                               f"\n"
