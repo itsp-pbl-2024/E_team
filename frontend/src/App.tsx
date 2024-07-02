@@ -1,6 +1,6 @@
 import './App.css';
 import AnswerBox from './answerbox/AnswerBox';
-import { Link, Route, Routes, Outlet, useLocation } from "react-router-dom";
+import {Link, Route, Routes, Outlet, useLocation} from "react-router-dom";
 import Players from "./players/Players";
 import Home from "./home/Home";
 import Settings from "./settings/Settings";
@@ -12,9 +12,21 @@ import Result from "./result/Result";
 import Logo from './img/logo.png';
 import { ReactComponent as HelpImage } from './img/help.svg';
 import { ReactComponent as SettingsImage } from './img/settings.svg';
+import Correct from './result/Correct';
+import Wrong from './result/Wrong';
+import {useDispatch} from "react-redux";
+import {resetCurrentGame} from "./app/redux/history";
 
-const Layout = ({ hideHeaderPaths = [] }: {hideHeaderPaths: string[]}) => {
-    const { pathname } = useLocation();
+
+const Layout = ({hideHeaderPaths = []}: { hideHeaderPaths: string[] }) => {
+    const {pathname} = useLocation();
+
+    const dispatch = useDispatch()
+
+    const reset = () => {
+        dispatch(resetCurrentGame())
+    }
+
     return (
         <>
             {!hideHeaderPaths.includes(pathname) &&
@@ -52,6 +64,8 @@ export default function App() {
                     <Route path='/result' element={<Result/>}/>
                     <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
                     <Route path='/HowTo' element={<HowTo/>}/>
+                    <Route path='/correct' element={<Correct/>}/>
+                    <Route path='/wrong' element={<Wrong/>}/>
                 </Route>
             </Routes>
         </div>
