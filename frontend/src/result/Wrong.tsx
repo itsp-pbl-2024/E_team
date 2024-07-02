@@ -25,7 +25,7 @@ const styles = {
 };
 
 function Wrong () {
-  const theme = useSelector((state: StateType) => state.theme.value)
+  const answer = useSelector((state: StateType) => state.history.value.currentGameStatus.answers).at(-1)
     return (
         <div>
             <div className="bg-gradient-to-r from-emerald-200 to-red-300 p-2">回答者→出題者</div>
@@ -37,7 +37,7 @@ function Wrong () {
             </div>
             <div className='m-6'>
                 <p>今回の解答</p>
-                <p className="text-3xl font-bold">{theme}</p>
+                <p className="text-3xl font-bold">{answer}</p>
             </div>
             <Link to={"/to_questioner_transition_confirm"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
