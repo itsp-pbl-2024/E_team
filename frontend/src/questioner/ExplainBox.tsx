@@ -1,23 +1,31 @@
 import '../App.css';
-import { useSelector } from "react-redux";
-import { StateType } from "../app/store";
-import { CensorType } from "../app/redux/settings";
-import React, { useState, useContext } from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {StateType} from "../app/store";
+import {CensorType} from "../app/redux/settings";
+import React, {useState, useContext} from 'react';
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import TopicGenerationButton from "./TopicGenerationButton";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import {UserProperty} from "../players/Players";
+import {confirmExplanation, confirmTheme, updateExplanation} from "../app/redux/history";
 
 function ExplainBox() {
-    const [explanation, setExplanation] = useState('');
+    const explanation = useSelector((state: StateType) => state.history.value.currentStatus.tmp_explanation)
     const [censoredExplanation, setCensoredExplanation] = useState<string>('');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isClicked, setIsClicked] = useState<Boolean>(false);
     const censorType: CensorType = useSelector((state: StateType) => state.settings.value.censorType)
 
-    const theme = useSelector((state: StateType) => state.theme.value)
+    const dispatch = useDispatch()
+    const theme = useSelector((state: StateType) => state.history.value.currentStatus.theme)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setExplanation(event.target.value);
+        dispatch(updateExplanation(event.target.value))
     };
+
+    const confirm = () => {
+        dispatch(confirmTheme())
+        dispatch(confirmExplanation())
+    }
 
     const handleButtonClick = async () => {
         const requestBody = {
@@ -47,19 +55,16 @@ function ExplainBox() {
             setErrorMessage('Error fetching data')
         }
         setIsClicked(true);
-
     };
 
     return (
-
         <div>
-            <TopicGenerationButton />
+            <TopicGenerationButton/>
 
             <div className="flex flex-col items-center p-4">
                 <textarea
                     value={explanation}
                     onChange={handleInputChange}
-                    // className="border rounded p-4 md:w-96 h-32 "
                     className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Input explanation"
                 />
@@ -93,14 +98,15 @@ function ExplainBox() {
 
 
             }
-
             <Link to={"/to_answer_transition_confirm"}>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={confirm}>
                     回答者画面へ
                 </button>
             </Link>
         </div>
     );
+
 }
 
 export default ExplainBox;

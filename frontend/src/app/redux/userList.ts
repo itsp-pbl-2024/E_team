@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { UserRole, UserProperty } from "../../players/Players"
+import {createSlice} from '@reduxjs/toolkit'
+import {UserProperty} from "../../players/Players"
 
 export const userListSlice = createSlice({
     name: 'userList',
@@ -14,6 +14,6 @@ export const userListSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setUserList } = userListSlice.actions
+export const {setUserList} = userListSlice.actions
 
 export default userListSlice.reducer

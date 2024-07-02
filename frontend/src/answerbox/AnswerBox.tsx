@@ -12,7 +12,7 @@ function AnswerBox() {
     const [isCheckButtonDisabled, setIsCheckButtonDisabled] = useState(false);
     const [isTransitionButtonDisabled, setIsTransitionButtonDisabled] = useState(false);
 
-    const theme = useSelector((state: StateType) => state.theme.value)
+    const theme = useSelector((state: StateType) => state.history.value.currentStatus.theme)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
