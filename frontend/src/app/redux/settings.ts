@@ -33,7 +33,7 @@ export const DifficutyTypes = {
 
 export const LanguageTypes = {
     ja: "日本語",
-    en: "英語"
+    en: "English"
 }
 
 export const settingSlice = createSlice({
@@ -52,10 +52,16 @@ export const settingSlice = createSlice({
         },
         setVolume: (state, action) => {
             state.value.volume = action.payload
+        },
+        setDifficulty: (state, action) => {
+            state.value.difficulty = action.payload
+        },
+        setLanguage: (state, action) => {
+            state.value.language = action.payload
         }
     }
 })
 
-export const { setCensorType, setVolume } = settingSlice.actions
+export const { setCensorType, setVolume, setDifficulty, setLanguage } = settingSlice.actions
 
 export default settingSlice.reducer

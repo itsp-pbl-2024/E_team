@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import store, { StateType } from "../app/store";
 
 
-import { CensorTypes, setCensorType, setVolume } from "../app/redux/settings";
+import { CensorTypes, LanguageTypes, DifficutyTypes, setCensorType, setVolume, setLanguage, setDifficulty } from "../app/redux/settings";
 
 function Settings() {
 
@@ -14,7 +14,6 @@ function Settings() {
 
     const cencerType = useSelector((state: StateType) => state.settings.value)
 
-    console.log(cencerType.censorType.label)
     const handleClose = () => {
         navigate(-1)
     }
@@ -25,6 +24,8 @@ function Settings() {
     const resetSetings = () => {
         dispatch(setCensorType(CensorTypes.chatgpt))
         dispatch(setVolume(50))
+        dispatch(setDifficulty(DifficutyTypes.normal))
+        dispatch(setLanguage(LanguageTypes.ja))
 
     }
 
@@ -34,6 +35,24 @@ function Settings() {
         }
         else {
             dispatch(setCensorType(CensorTypes.spacy))
+        }
+    }
+
+    const DifficultyTypeHandler = (e: any) => {
+        if (e.target.value == "普通") {
+            dispatch(setDifficulty(DifficutyTypes.normal))
+        }
+        else {
+            dispatch(setDifficulty(DifficutyTypes.hard))
+        }
+    }
+
+    const LanguageTypeHandler = (e: any) => {
+        if (e.target.value == "日本語") {
+            dispatch(setLanguage(LanguageTypes.ja))
+        }
+        else {
+            dispatch(setLanguage(LanguageTypes.en))
         }
     }
 
@@ -69,9 +88,9 @@ function Settings() {
                     <label className="block text-gray-700">言語</label>
                 </div>
                 <div className="w-1/4">
-                    <select className="border rounded p-2 w-3/4" disabled>
-                        <option>日本語</option>
-                        <option>英語</option>
+                    <select className="border rounded p-2 w-3/4" value={cencerType.language} onChange={LanguageTypeHandler}>
+                        <option value="日本語">日本語</option>
+                        <option value="English">English</option>
                     </select>
                 </div>
             </div >
@@ -81,8 +100,9 @@ function Settings() {
                     <label className="block text-gray-700">難易度</label>
                 </div>
                 <div className="w-1/4">
-                    <select className="border rounded p-2 w-3/4" disabled>
-                        <option>普通</option>
+                    <select className="border rounded p-2 w-3/4" value={cencerType.difficulty} onChange={DifficultyTypeHandler}>
+                        <option value="普通">普通</option>
+                        <option value="難しい">難しい</option>
                     </select>
                 </div>
 
