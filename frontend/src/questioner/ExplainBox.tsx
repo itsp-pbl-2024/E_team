@@ -2,10 +2,9 @@ import '../App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../app/store";
 import {CensorType} from "../app/redux/settings";
-import React, {useState, useContext} from 'react';
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import React from 'react';
+import {Link} from "react-router-dom";
 import TopicGenerationButton from "./TopicGenerationButton";
-import {UserProperty} from "../players/Players";
 import {appendCensoredExplanation, confirmExplanation, confirmTheme, updateExplanation} from "../app/redux/history";
 
 function ExplainBox() {
@@ -19,12 +18,9 @@ function ExplainBox() {
         dispatch(updateExplanation(event.target.value))
     };
 
-    const confirm = () => {
+    const censorExplanation = async () => {
         dispatch(confirmTheme())
         dispatch(confirmExplanation())
-    }
-
-    const censorExplanation = async () => {
         const requestBody = {
             text: explanation,
             theme: theme,
@@ -42,7 +38,7 @@ function ExplainBox() {
                 console.log(data);
                 dispatch(appendCensoredExplanation(data['censored_text']))
             } else {
-                console.log( await response.json())
+                console.log(await response.json())
             }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -64,11 +60,8 @@ function ExplainBox() {
 
             <Link to={"/to_answer_transition_confirm"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => {
-                            confirm();
-                            censorExplanation();
-                        }}
-                      disabled={!explanation}
+                        onClick={censorExplanation}
+                        disabled={!explanation}
                 >
                     確定する
                 </button>
