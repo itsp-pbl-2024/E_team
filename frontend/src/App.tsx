@@ -4,7 +4,7 @@ import { Link, Route, Routes, Outlet, useLocation } from "react-router-dom";
 import Players from "./players/Players";
 import Home from "./home/Home";
 import Settings from "./settings/Settings";
-import ExplainBox from './Questioner/ExplainBox';
+import ExplainBox from './questioner/ExplainBox';
 import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionConfirm';
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
 import HowTo from './help/HowTo';
@@ -44,7 +44,7 @@ export default function App() {
         <div className="App">
             <Routes>
                 <Route element={<Layout hideHeaderPaths={["/"]}/>}>
-                    <Route path='/' element={<Home/>}/>
+                    <Route path='/' element={<Home/>}/>x
                     <Route path='/players' element={<Players/>}/>
                     <Route path='/settings' element={<Settings/>}/>
                     <Route path='/questioner' element={<ExplainBox/>}/>
