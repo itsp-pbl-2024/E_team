@@ -12,7 +12,7 @@ enum CorrectStatus {
 function Result() {
 
     const [correctStatus, setCorrectStatus] = useState<CorrectStatus>(CorrectStatus.Processing)
-    const theme = useSelector((state: StateType) => state.history.value.currentStatus.theme)
+    const theme = useSelector((state: StateType) => state.history.value.currentGameStatus.theme)
     const answer = "キャンプファイヤー"
 
     useEffect(() => {

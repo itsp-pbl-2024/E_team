@@ -12,8 +12,8 @@ function AnswerBox() {
     const [isCheckButtonDisabled, setIsCheckButtonDisabled] = useState(false);
     const [isTransitionButtonDisabled, setIsTransitionButtonDisabled] = useState(false);
 
-    const theme = useSelector((state: StateType) => state.history.value.currentStatus.theme)
-    const censoredExplanation = useSelector((state: StateType) => state.history.value.currentStatus.censored_explanations).at(-1)
+    const theme = useSelector((state: StateType) => state.history.value.currentGameStatus.theme)
+    const censoredExplanation = useSelector((state: StateType) => state.history.value.currentGameStatus.censored_explanations).at(-1)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
@@ -34,7 +34,7 @@ function AnswerBox() {
             <div className="bg-emerald-200 p-2">回答者</div>
             <div className="m-10 max-h-60 overflow-y-scroll border p-1">
                 {/*    検閲された文章 */}
-                {censoredExplanation}
+                {/*{censoredExplanation}*/}
             </div>
             <input
                 type="text"
