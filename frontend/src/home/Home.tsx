@@ -1,9 +1,11 @@
 import '../index.css';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import ExplainBox from '../questioner/ExplainBox';
 import React, {useState} from 'react';
 import Players from '../players/Players';
+import Settings from '../settings/Settings';
 import Logo from '../img/logo.png'
-import Button from '@mui/material/Button';
+import HowTo from '../help/HowTo';
 
 function Home() {
     const [username, setUsername] = useState<string>('');
@@ -17,22 +19,23 @@ function Home() {
         <>
             <div className="h-screen flex flex-col items-center justify-center">
 
-                <img className="block h-8 w-auto m-8" src={Logo} alt="C∃ИS BR∃∀K" width={100} height={100} />
+                <img className="block h-14 w-auto m-8" src={Logo} alt="C∃ИS BR∃∀K" />
                 <Link to={"/players"}>
-                    <Button variant='contained' className="w-40 my-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button className="btn-primary w-40 my-2">
                         ゲーム開始
-                    </Button>
+                    </button>
                 </Link>
                 <Link to={"/settings"}>
-                    <Button variant='contained' className="w-40 my-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button className="btn-primary w-40 my-2">
                         設定
-                    </Button>
+                    </button>
+                </Link>
+                <Link to={"/Howto"}>
+                    <button className="btn-primary w-40 my-2">
+                        ヘルプ
+                    </button>
                 </Link>
             </div>
-
-            <Routes>
-                <Route path='/players' element={<Players/>}/>
-            </Routes>
         </>
     );
 }

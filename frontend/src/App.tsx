@@ -9,30 +9,29 @@ import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionCo
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
 import HowTo from './help/HowTo';
 import Result from "./result/Result";
-
+import Logo from './img/logo.png';
+import { ReactComponent as HelpImage } from './img/help.svg';
+import { ReactComponent as SettingsImage } from './img/settings.svg';
 
 const Layout = ({ hideHeaderPaths = [] }: {hideHeaderPaths: string[]}) => {
     const { pathname } = useLocation();
     return (
         <>
             {!hideHeaderPaths.includes(pathname) &&
-                <header>
-                    <Link to={"/"}>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Home
-                        </button>
+                <nav className="flex justify-between bg-white w-full h-20 z-20 top-0 start-0 border-b border-gray-200">
+                    <div className='flex-1'></div>
+                    <Link to={"/"} className='flex-1 flex justify-center self-center'>
+                        <img className="object-scale-down block h-8 m-2" src={Logo} alt="C∃ИS BR∃∀K" />
                     </Link>
-                    <Link to={"/settings"}>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            設定
-                        </button>
-                    </Link>
-                    <Link to={"/HowTo"}>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        ヘルプ
-                    </button>
-                </Link>
-                </header>
+                    <div className="flex-1 flex justify-end item-stretch">
+                        <Link to={"/HowTo"} className="self-center">
+                            <HelpImage className="block object-scale-down mx-2 w-10 h-8" />
+                        </Link>
+                        <Link to={"/settings"} className="self-center">
+                            <SettingsImage className="block bject-scale-down my-auto mx-2 w-10 h-8 fill-white"/>
+                        </Link>
+                    </div>
+                </nav>
             }
             <Outlet/>
         </>
