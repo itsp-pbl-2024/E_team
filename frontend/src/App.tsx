@@ -9,15 +9,12 @@ import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionCo
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
 import HowTo from './help/HowTo';
 import Result from "./result/Result";
-<<<<<<< HEAD
-import {useDispatch, useSelector} from "react-redux";
-import {StateType} from "./app/store";
-import {resetCurrentGame} from "./app/redux/history";
+import Correct from './result/Correct';
+import Wrong from './result/Wrong';
 
 
 const Layout = ({ hideHeaderPaths = [] }: {hideHeaderPaths: string[]}) => {
     const { pathname } = useLocation();
-=======
 import Correct from './result/Correct';
 import Wrong from './result/Wrong';
 import {useDispatch} from "react-redux";
@@ -26,8 +23,6 @@ import {resetCurrentGame} from "./app/redux/history";
 
 const Layout = ({hideHeaderPaths = []}: { hideHeaderPaths: string[] }) => {
     const {pathname} = useLocation();
->>>>>>> d6dc22a77982cc96806ed3b84ab78ee5d54638c6
-
     const dispatch = useDispatch()
 
     const reset = () => {
@@ -76,7 +71,6 @@ export default function App() {
                     <Route path='/HowTo' element={<HowTo/>}/>
                     <Route path='/correct' element={<Correct/>}/>
                     <Route path='/wrong' element={<Wrong/>}/>
-                </Route>
             </Routes>
         </div>
     );
