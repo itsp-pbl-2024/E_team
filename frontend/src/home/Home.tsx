@@ -1,9 +1,7 @@
 import '../index.css';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import ExplainBox from '../questioner/ExplainBox';
 import React, {useState} from 'react';
 import Players from '../players/Players';
-import Settings from '../settings/Settings';
 import Logo from '../img/logo.png'
 import Button from '@mui/material/Button';
 
