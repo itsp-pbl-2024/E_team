@@ -5,7 +5,6 @@ import { CensorType } from "../app/redux/settings";
 import React, { useState, useContext } from 'react';
 import TopicGenerationButton from "./TopicGenerationButton";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import ToAnswerTransitionConfirm from '../transition_confirm/ToAnswerTransitionConfirm';
 
 function ExplainBox() {
     const [explanation, setExplanation] = useState('');
