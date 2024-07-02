@@ -1,13 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit'
-import ThemeReducer from "./redux/theme"
 import SettingsReducer from "./redux/settings"
 import UserListReducer from './redux/userList'
+import HistoryReducer from './redux/history'
 
 const store = configureStore({
     reducer: {
-        theme: ThemeReducer,
         settings: SettingsReducer,
-        userList: UserListReducer
+        userList: UserListReducer,
+        history: HistoryReducer,
     }
 })
 
