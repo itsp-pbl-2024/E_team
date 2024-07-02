@@ -1,17 +1,23 @@
 import React, {useState} from 'react';
 import './AnswerBox.css'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../app/store";
 import {Link} from "react-router-dom";
+import {appendAnswer} from "../app/redux/history";
 
 function AnswerBox() {
     const [userAnswer, setUserAnswer] = useState('');
 
+    const dispatch = useDispatch()
     const censoredExplanation = useSelector((state: StateType) => state.history.value.currentGameStatus.censored_explanations).at(-1)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
     };
+
+    const confirm = () => {
+        dispatch(appendAnswer(userAnswer))
+    }
 
     return (
         <div className="answer-box">
@@ -34,7 +40,8 @@ function AnswerBox() {
             {/*    <p className="incorrect">Incorrect. Try again!</p>*/}
             {/*)}*/}
             <Link to={"/result"}>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+                        onClick={confirm}>
                     確定する
                 </button>
             </Link>
