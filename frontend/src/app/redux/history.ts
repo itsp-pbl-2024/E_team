@@ -43,6 +43,7 @@ export const historySlice = createSlice({
         },
         confirmExplanation: (state) => {
             state.value.currentStatus.explanations = [...state.value.currentStatus.explanations, state.value.currentStatus.tmp_explanation]
+            state.value.currentStatus.tmp_explanation = ""
         },
         updateExplanation: (state, action) => {
             state.value.currentStatus.tmp_explanation = action.payload
