@@ -4,7 +4,7 @@ import { Link, Route, Routes, Outlet, useLocation } from "react-router-dom";
 import Players from "./players/Players";
 import Home from "./home/Home";
 import Settings from "./settings/Settings";
-import ExplainBox from './temp_questioner/ExplainBox';
+import ExplainBox from './questioner/ExplainBox';
 import ToAnswerTransitionConfirm from './transition_confirm/ToAnswerTransitionConfirm';
 import ToQuestionerTransitionConfirm from './transition_confirm/ToQuestionerTransitionConfirm';
 import HowTo from './help/HowTo';

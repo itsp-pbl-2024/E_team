@@ -1,6 +1,6 @@
 import '../App.css';
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import ExplainBox from '../temp_questioner/ExplainBox';
+import ExplainBox from '../questioner/ExplainBox';
 
 function ToQuestionerTransitionConfirm() {
     console.log("In Transition Confirm");

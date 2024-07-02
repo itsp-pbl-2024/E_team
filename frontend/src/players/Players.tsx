@@ -7,7 +7,7 @@ import { setUserList } from "../app/redux/userList";
 import store, { StateType } from "../app/store";
 
 import './players.css'
-import ExplainBox from '../temp_questioner/ExplainBox';
+import ExplainBox from '../questioner/ExplainBox';
 /**
  * ユーザーの役割の列挙型
  */
