@@ -165,7 +165,7 @@ function Players() {
                 <button onClick={assignRole} className='m-4'>
                     役割を決める
                 </button>
-                <Link to={"/questioner"}>
+                <Link to={gameMode == 'single' ? "/questioner" : "/2team/questioner"}>
                     <button className='m-4'
                         disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length === 0}
                     >
@@ -175,9 +175,6 @@ function Players() {
 
 
             </div>
-            <Routes>
-                <Route path='/questioner' element={<ExplainBox />} />
-            </Routes>
         </div >
     );
 }
