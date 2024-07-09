@@ -16,7 +16,18 @@ import { useDispatch } from "react-redux";
 import { resetCurrentGame } from "./app/redux/history";
 
 import ExplainBox2 from './multiTeamModeView/questioner/ExplainBox';
+<<<<<<< HEAD
 ;
+=======
+import AnswerBox2 from './multiTeamModeView/answerbox/AnswerBox';
+import Result2 from "./multiTeamModeView/result/Result";
+import Correct2 from "./multiTeamModeView/result/Correct";
+import Wrong2 from "./multiTeamModeView/result/Wrong";
+import ToAnswerTransitionConfirm2 from './multiTeamModeView/transition_confirm/ToAnswerTransitionConfirm';
+import ToQuestionerTransitionConfirm2 from './multiTeamModeView/transition_confirm/ToQuestionerTransitionConfirm';
+import {useDispatch} from "react-redux";
+import {resetCurrentGame} from "./app/redux/history";
+>>>>>>> decfe25 (add views)
 
 
 
@@ -70,6 +81,12 @@ export default function App() {
                     <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm />} />
                     <Route path='/HowTo' element={<HowTo />} />
                     <Route path='/2team/questioner' element={<ExplainBox2/>}/>
+                    <Route path='/2team/answerbox' element={<AnswerBox2/>}/>
+                    <Route path='/2team/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm2/>}/>
+                    <Route path='/2team/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm2/>}/>
+                    <Route path='/2team/result' element={<Result2/>}/>
+                    <Route path='/2team/correct' element={<Correct2/>}/>
+                    <Route path='/2team/wrong' element={<Wrong2/>}/>
                 </Route>
             </Routes>
         </div>
