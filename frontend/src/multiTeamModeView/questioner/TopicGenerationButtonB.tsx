@@ -1,14 +1,15 @@
 import {useState} from "react";
 import './TopicGenerationButton.css'
 import {useDispatch, useSelector} from "react-redux";
-import {StateType} from "../app/store";
-import {changeThemeA} from "../app/redux/history";
+import {StateType} from "../../app/store";
+import {changeThemeA, changeThemeB} from "../../app/redux/history";
 
-function TopicGenerationButton() {
+function TopicGenerationButton(props: { hide: boolean }) {
     const dispatch = useDispatch()
-    const theme = useSelector((state: StateType) => state.history.value.currentGameStatusA.theme)
-    const theme_confirmed = useSelector((state: StateType) => state.history.value.currentGameStatusA.theme_confirmed)
+    const theme = useSelector((state: StateType) => state.history.value.currentGameStatusB.theme)
+    const theme_confirmed = useSelector((state: StateType) => state.history.value.currentGameStatusB.theme_confirmed)
     const GenerateButtonClick = async () => {
+        if (props.hide) return
         if (theme_confirmed) return
         try {
             const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + "/theme", {
@@ -19,7 +20,7 @@ function TopicGenerationButton() {
             });
             if (response.ok) {
                 const data = await response.json();
-                dispatch(changeThemeA(data.theme))
+                dispatch(changeThemeB(data.theme))
                 console.log(data);
             } else {
                 console.log(await response.json());
@@ -32,7 +33,7 @@ function TopicGenerationButton() {
     return (
         <div className="m-6">
             <div className="text-lg">お題</div>
-            <p className="text-3xl font-bold">{theme} <a onClick={GenerateButtonClick}>⚙</a></p>
+            <p className="text-3xl font-bold">{props.hide || theme} <a onClick={GenerateButtonClick}>⚙</a></p>
             <div className="text-lg">を当ててもらおう</div>
         </div>
     );

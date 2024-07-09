@@ -25,7 +25,7 @@ const styles = {
 };
 
 export function Wrong() {
-  const answer = useSelector((state: StateType) => state.history.value.currentGameStatus.answers).at(-1)
+  const answer = useSelector((state: StateType) => state.history.value.currentGameStatusA.answers).at(-1)
   return (
     <div >
       <div className="bg-gradient-to-r from-emerald-200 to-red-300 p-2">回答者→出題者</div>
