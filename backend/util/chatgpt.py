@@ -8,7 +8,23 @@ from .censor_settings import DifficultyType
 # )
 
 def censor_by_chatgpt(text: str, theme: str, difficulty=DifficultyType.normal):
-    client = OpenAI()
+    client = OpenAI
+    if difficulty == DifficultyType.normal:
+        content=f"これからあなたに{theme}について説明した文を渡します。" \
+                f"あなたの役割は、説明文を検閲し、{theme}について説明していることを悟らせないことです。"\
+                f"ゲームを楽しくするため、適度に検閲してください。特に、固有名詞、地名、人名など、かなり推測されやすくなる情報は消してください。"\
+                f"なお、どんな場合でも{theme}を含めた返信をしないでください。検閲後の文章のみを返事してください。\n\n"\
+                f"{text}"
+    elif difficulty == DifficultyType.hard:
+        content=f"これからあなたに{theme}について説明した文を渡します。" \
+                f"あなたの役割は、説明文を検閲し、{theme}について説明していることを悟らせないことです。"\
+                f"ゲームを楽しくするため、多くの箇所を検閲してください。特に、固有名詞、地名、人名など、推測できる情報を全て消してください。"\
+                f"それ以外にも、説明で特徴的なポイントは言いかえたりしてわかりにくくしてください。"\
+                f"なお、どんな場合でも{theme}を含めた返信をしないでください。検閲後の文章のみを返事してください。\n\n"\
+                f"{text}"
+    else:
+        content = "以下の文を繰り返してください。\n\n検閲に失敗しました"
+
     completion = client.chat.completions.create(
         # model="gpt-3.5-turbo",
         # model="gpt-4o",
