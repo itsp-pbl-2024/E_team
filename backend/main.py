@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import random
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from util.censor import censor
+from util.censor import censor, DifficultyType
 from util.chatgpt import censor_by_chatgpt
 from util.chatgpt import is_synonym_by_chatgpt
 
@@ -31,17 +31,18 @@ async def get_theme():
         "theme": theme_list[index]
     }
 
-
 class CensorItem(BaseModel):
     text: str
     theme: str
-
+    difficulty: DifficultyType
 
 @app.post("/censor")
 async def censor_text(item: CensorItem):
-    censored_text = censor(item.text, item.theme)
+    print(f"original:{item.text}")
+    print(f"difficulty:{item.difficulty.value}")
+    censored_text = censor(item.text, item.theme, item.difficulty)
+    print(f"censored:{censored_text}")
     return {"censored_text": censored_text}
-
 
 @app.post("/censor/chatgpt")
 async def censor_text_chatgpt(item: CensorItem):

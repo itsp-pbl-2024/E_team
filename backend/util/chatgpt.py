@@ -1,24 +1,37 @@
 from openai import OpenAI
 import re
+from .censor_settings import DifficultyType
 
 # client = openai.OpenAI(
 #     organization="org-I8YkLWwovxecZf4Vx8IyF2ok",
 #     project="proj_LApVUeX69juOsNm9f5WrZENZ",
 # )
 
-def censor_by_chatgpt(text: str, theme: str):
+def censor_by_chatgpt(text: str, theme: str, difficulty=DifficultyType.normal):
+    if difficulty == DifficultyType.normal:
+        content=f"これからあなたに{theme}について説明した文を渡します。" \
+                f"あなたの役割は、説明文を検閲し、{theme}について説明していることを悟らせないことです。"\
+                f"ゲームを楽しくするため、適度に検閲してください。特に、固有名詞、地名、人名など、かなり推測されやすくなる情報は消してください。"\
+                f"なお、どんな場合でも{theme}を含めた返信をしないでください。検閲後の文章のみを返事してください。\n\n"\
+                f"{text}"
+    elif difficulty == DifficultyType.hard:
+        content=f"これからあなたに{theme}について説明した文を渡します。" \
+                f"あなたの役割は、説明文の書き換えと削除により、{theme}についての説明だとわからなくすることです。"\
+                f"ゲームを楽しくするため、多くの箇所を検閲してください。特に、固有名詞、地名、人名など、{theme}につながる情報を消してください。"\
+                f"文や文の一部が多くの情報を含むなら、その箇所を<censor>と削除してください。"\
+                f"更に、書いてある内容が具体的なら、抽象的であいまいな表現に書き換えてください。"\
+                f"なお、どんな場合でも{theme}を含めた返信をしないでください。検閲後の文章のみを返事してください。\n\n"\
+                f"{text}"
+    else:
+        content = "以下の文を繰り返してください。\n\n検閲に失敗しました"
+
     client = OpenAI()
     completion = client.chat.completions.create(
         # model="gpt-3.5-turbo",
         # model="gpt-4o",
             model="gpt-4-turbo",
         messages=[{"role": "user",
-                   "content": f"これからあなたに{theme}について説明した文を渡します。"
-                              f"あなたの役割は、説明文を検閲し、{theme}について説明していることを悟らせないことです。"
-                              f"ゲームを楽しくするため、適度に検閲してください。特に、固有名詞、地名、人名など、かなり推測されやすくなる情報は消してください。"
-                            #   f"次の文章に関して、{theme}と推測されそうな言葉すべてを-に置き換えて返信してください。"
-                              f"なお、どんな場合でも{theme}を含めた返信をしないでください。検閲後の文章のみを返事してください。\n\n"
-                              f"{text}"
+                   "content": content
                    }],
     )
     return completion.choices[0].message.content
