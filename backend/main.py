@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from util.censor import censor
 from util.chatgpt import censor_by_chatgpt
 from util.chatgpt import is_synonym_by_chatgpt
+import enum
 
 app = FastAPI()
 
@@ -31,17 +32,23 @@ async def get_theme():
         "theme": theme_list[index]
     }
 
+# frontendと合わせた
+class DifficultyType(enum.Enum):
+    normal = "普通"
+    hard = "難しい"
 
 class CensorItem(BaseModel):
     text: str
     theme: str
-
+    difficulty: DifficultyType
 
 @app.post("/censor")
 async def censor_text(item: CensorItem):
+    print(f"original:{item.text}")
+    print(f"difficulty:{item.difficulty.value}")
     censored_text = censor(item.text, item.theme)
+    print(f"censored:{censored_text}")
     return {"censored_text": censored_text}
-
 
 @app.post("/censor/chatgpt")
 async def censor_text_chatgpt(item: CensorItem):
