@@ -48,8 +48,6 @@ export function Correct(props: { wonTeam: string }) {
                     <p className="text-3xl font-bold">{themeB}</p>
                 </div>
             </div>
-
-
             <Link to={"/"}>
                 <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
                     トップへ

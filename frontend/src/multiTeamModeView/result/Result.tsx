@@ -4,7 +4,6 @@ import {StateType} from "../../app/store";
 import {Correct} from "./Correct"
 import {Wrong} from "./Wrong";
 import Processing from "./Processing";
-
 enum CorrectStatus {
     Correct,
     Wrong,
@@ -12,7 +11,6 @@ enum CorrectStatus {
 }
 
 function Result() {
-
     const [correctStatusA, setCorrectStatusA] = useState<CorrectStatus>(CorrectStatus.Processing)
     const [correctStatusB, setCorrectStatusB] = useState<CorrectStatus>(CorrectStatus.Processing)
 
@@ -67,7 +65,6 @@ function Result() {
             console.error('Error checking synonym:', error);
         }
     };
-
 
     useEffect(() => {
         checkAnswer()

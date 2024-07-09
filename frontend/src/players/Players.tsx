@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserList } from "../app/redux/userList";
 import store, { StateType } from "../app/store";
 
+
 import './players.css'
 import ExplainBox from '../questioner/ExplainBox';
 /**
@@ -23,17 +24,39 @@ export enum UserRole {
 export type UserProperty = {
     username: string;
     role: UserRole;
+    team: number;
+}
+
+function shuffle(array: number[]) {
+    let currentIndex = array.length;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+        // Pick a remaining element...
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
 }
 
 function Players() {
+    useEffect(() => {
+        resetRole();
+      }, []);
     const [username, setUsername] = useState<string>('');
 
     const dispatch = useDispatch()
     const userList: UserProperty[] = useSelector((state: StateType) => state.userList.value)
 
+    const gameMode = useSelector((state: StateType) => state.mode.mode)
+
     const handleAddParticipant = () => {
         if (username.trim() !== '') {
-            const newParticipant: UserProperty = { username, role: UserRole.Unassigned };
+            const newParticipant: UserProperty = { username, role: UserRole.Unassigned, team: 1 };
 
             dispatch(setUserList([...userList, newParticipant]))
             setUsername('');
@@ -44,21 +67,63 @@ function Players() {
         setUsername(event.target.value);
     };
 
+    const resetRole = () => {
+        const updatedParticipants = userList.map((participant, index) => {
+            return { ...participant, role: UserRole.Unassigned };
+        });
+        dispatch(setUserList(updatedParticipants))
+    };
+
     const assignRole = () => {
         if (userList.length === 0) return;
 
-        // 乱数で説明側のインデックスを決定
-        const explanationIndex = Math.floor(Math.random() * userList.length);
+        if (gameMode === 'single') {
+            // 乱数で説明側のインデックスを決定
+            const explanationIndex = Math.floor(Math.random() * userList.length);
+    
+            // 説明側と回答側を設定
+            const updatedParticipants = userList.map((participant, index) => {
+                if (index === explanationIndex) {
+                    return { ...participant, role: UserRole.Explanation, team: 1 };
+                }
+                return { ...participant, role: UserRole.Answer, team: 1 };
+            });
+            dispatch(setUserList(updatedParticipants))
+        } else {
+            const indices  = Array(userList.length).fill(0).map((e,i) => e+i);
+            shuffle(indices);
+            const teamSize = indices.length / 2 | 0;
+            const head1 = 0;
+            console.log('Team size: ' + teamSize);
+            console.log(indices)
+            const head2 = teamSize;
 
-        // 説明側と回答側を設定
-        const updatedParticipants = userList.map((participant, index) => {
-            if (index === explanationIndex) {
-                return { ...participant, role: UserRole.Explanation };
-            }
-            return { ...participant, role: UserRole.Answer };
-        });
+            const updatedUserList = userList.map((user, i) => {
+                const index = indices[i];
+                const newUser = { ...user };
+                
+                if (index < teamSize) {
+                    newUser.team = 1;
+                    if (index === head1) {
+                        newUser.role = UserRole.Explanation;
+                    } else {
+                        newUser.role = UserRole.Answer;
+                    }
+                } else {
+                    newUser.team = 2;
+                    if (index === head2) {
+                        newUser.role = UserRole.Explanation;
+                    } else {
+                        newUser.role = UserRole.Answer;
+                    }
+                }
+                
+                return newUser;
+            });
+            dispatch(setUserList(updatedUserList))
+        }
+        
 
-        dispatch(setUserList(updatedParticipants))
     };
 
 
@@ -86,7 +151,12 @@ function Players() {
             <div>
                 <div className='grid grid-cols-4 gap-4'>
                     {userList.map((participant, index) =>
-                        <div key={index} className={'p-4 rounded-md ' + ((participant.role == UserRole.Unassigned) ? "bg-gray-300" : participant.role == UserRole.Explanation ? "bg-red-100" : "bg-green-100")}  >
+                        <div key={index} className={'p-4 rounded-md ' + 
+                            ((participant.role == UserRole.Unassigned)
+                            ? "bg-gray-300" 
+                            : (participant.role == UserRole.Explanation
+                                ? ((participant.team == 1) ? "bg-green-500" : "bg-red-500")
+                                : ((participant.team == 1) ? "bg-green-100" : "bg-red-100" )))}>
                             {participant.username} - {participant.role}
                         </div>
                     )}
