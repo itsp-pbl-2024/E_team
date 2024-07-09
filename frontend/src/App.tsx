@@ -1,6 +1,6 @@
 import './App.css';
 import AnswerBox from './answerbox/AnswerBox';
-import {Link, Route, Routes, Outlet, useLocation} from "react-router-dom";
+import { Link, Route, Routes, Outlet, useLocation } from "react-router-dom";
 import Players from "./players/Players";
 import Home from "./home/Home";
 import Settings from "./settings/Settings";
@@ -11,12 +11,12 @@ import HowTo from './help/HowTo';
 import Result from "./result/Result";
 import Correct from './result/Correct';
 import Wrong from './result/Wrong';
-import {useDispatch} from "react-redux";
-import {resetCurrentGame} from "./app/redux/history";
+import { useDispatch } from "react-redux";
+import { resetCurrentGame } from "./app/redux/history";
 
 
-const Layout = ({hideHeaderPaths = []}: { hideHeaderPaths: string[] }) => {
-    const {pathname} = useLocation();
+const Layout = ({ hideHeaderPaths = [] }: { hideHeaderPaths: string[] }) => {
+    const { pathname } = useLocation();
 
     const dispatch = useDispatch()
 
@@ -45,7 +45,7 @@ const Layout = ({hideHeaderPaths = []}: { hideHeaderPaths: string[] }) => {
                     </Link>
                 </header>
             }
-            <Outlet/>
+            <Outlet />
         </>
     );
 };
@@ -54,18 +54,16 @@ export default function App() {
     return (
         <div className="App">
             <Routes>
-                <Route element={<Layout hideHeaderPaths={["/"]}/>}>
-                    <Route path='/' element={<Home/>}/>x
-                    <Route path='/players' element={<Players/>}/>
-                    <Route path='/settings' element={<Settings/>}/>
-                    <Route path='/questioner' element={<ExplainBox/>}/>
-                    <Route path='/answerbox' element={<AnswerBox/>}/>
-                    <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm/>}/>
-                    <Route path='/result' element={<Result/>}/>
-                    <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm/>}/>
-                    <Route path='/HowTo' element={<HowTo/>}/>
-                    <Route path='/correct' element={<Correct/>}/>
-                    <Route path='/wrong' element={<Wrong/>}/>
+                <Route element={<Layout hideHeaderPaths={["/"]} />}>
+                    <Route path='/' element={<Home />} />x
+                    <Route path='/players' element={<Players />} />
+                    <Route path='/settings' element={<Settings />} />
+                    <Route path='/questioner' element={<ExplainBox />} />
+                    <Route path='/answerbox' element={<AnswerBox />} />
+                    <Route path='/to_answer_transition_confirm' element={<ToAnswerTransitionConfirm />} />
+                    <Route path='/result' element={<Result />} />
+                    <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm />} />
+                    <Route path='/HowTo' element={<HowTo />} />
                 </Route>
             </Routes>
         </div>
