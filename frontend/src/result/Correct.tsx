@@ -1,12 +1,12 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const styles = {
   container: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '80vh',
+    height: '30vh',
     // backgroundColor: '#f0f0f0', // Optional background color for the screen
   },
   correctCircle: {
@@ -22,19 +22,24 @@ const styles = {
   },
 };
 
-function Correct () {
-    return (
-        <div>
-            <div style={styles.container}>
-                <div style={styles.correctCircle}>✔︎</div>
-            </div>
-            <Link to={"/"}>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-                    トップへ
-                </button>
-            </Link>
-        </div>
-    );
+export function Correct() {
+  return (
+    <div>
+      <div className='m-6'>
+        <p className="text-3xl font-bold">正解</p>
+        <p className="text-3xl font-bold">おめでとう</p>
+      </div>
+      <div style={styles.container}>
+        <div style={styles.correctCircle}>✔︎</div>
+      </div>
+
+      <Link to={"/"}>
+        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+          トップへ
+        </button>
+      </Link>
+    </div>
+  );
 };
 
 export default Correct;

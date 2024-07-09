@@ -1,7 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {useSelector} from "react-redux";
-import {StateType} from "../app/store";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { StateType } from "../app/store";
+import { Link } from "react-router-dom";
+import { Correct } from "./Correct"
+import { Wrong } from "./Wrong";
+import Processing from "./Processing";
+import { wait } from "@testing-library/user-event/dist/utils";
 
 enum CorrectStatus {
     Correct,
@@ -22,7 +26,7 @@ function Result() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({theme, answer}),
+                body: JSON.stringify({ theme, answer }),
             });
             if (response.ok) {
                 const data = await response.json();
@@ -42,58 +46,21 @@ function Result() {
         }
     };
 
+
     useEffect(() => {
-    // checkAnswer
+        checkAnswer()
     }, [])
 
     return (
         <>
-             <button onClick={checkAnswer}>
-                correct?
-            </button>
-            <Link to={"/correct"}>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-                    正解画面
-                </button>
-            </Link>
-
-            {/* <button onClick={() => {setCorrectStatus(CorrectStatus.Wrong)}}>
-                wrong
-            </button> */}
-            <Link to={"/wrong"}>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-                    不正解画面
-                </button>
-            </Link>
-            <button onClick={() => {
-                setCorrectStatus(CorrectStatus.Processing)
-            }}>
-                processing
-            </button>
             {correctStatus == CorrectStatus.Correct &&
-                <>
-                    <div className="text-5xl">
-                        ✓
-                    </div>
-                </> || correctStatus == CorrectStatus.Wrong &&
-                <>
-                    <div className="text-5xl">
-                        ✗
-                    </div>
-                </>
+                <Correct />
+                || correctStatus == CorrectStatus.Wrong &&
+                <Wrong />
                 ||
-                <>
-                    <div className="text-5xl">
-                        判定中...
-                    </div>
-                </>
+                <Processing />
             }
 
-            <Link to={"/"}>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
-                    トップへ
-                </button>
-            </Link>
         </>
     );
 }
