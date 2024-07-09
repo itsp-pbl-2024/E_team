@@ -1,10 +1,11 @@
 import wikipedia
-from .censor import censor_by_list, DifficultyType
+from .censor import censor_by_list
+from .censor_settings import DifficultyType
 
 wikipedia.set_lang("jp")
 
 def censor_by_wikipedia(text: str, theme: str, difficulty: DifficultyType) -> str:
-    return censor_by_list(text, theme, wikipedia.page(theme).links)
+    return censor_by_list(text, theme, wikipedia.page(theme).links, difficulty)
 
 if __name__ == "__main__":
     content="""

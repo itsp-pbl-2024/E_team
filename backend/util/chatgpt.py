@@ -1,12 +1,13 @@
 from openai import OpenAI
 import re
+from .censor_settings import DifficultyType
 
 # client = openai.OpenAI(
 #     organization="org-I8YkLWwovxecZf4Vx8IyF2ok",
 #     project="proj_LApVUeX69juOsNm9f5WrZENZ",
 # )
 
-def censor_by_chatgpt(text: str, theme: str):
+def censor_by_chatgpt(text: str, theme: str, difficulty=DifficultyType.normal):
     client = OpenAI()
     completion = client.chat.completions.create(
         # model="gpt-3.5-turbo",
