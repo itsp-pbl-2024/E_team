@@ -16,8 +16,8 @@ enum CorrectStatus {
 function Result() {
 
     const [correctStatus, setCorrectStatus] = useState<CorrectStatus>(CorrectStatus.Processing)
-    const theme = useSelector((state: StateType) => state.history.value.currentGameStatus.theme)
-    const answer = useSelector((state: StateType) => state.history.value.currentGameStatus.answers).at(-1)
+    const theme = useSelector((state: StateType) => state.history.value.currentGameStatusA.theme)
+    const answer = useSelector((state: StateType) => state.history.value.currentGameStatusA.answers).at(-1)
 
     const checkAnswer = async () => {
         try {

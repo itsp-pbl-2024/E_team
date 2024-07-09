@@ -1,5 +1,6 @@
-import '../App.css';
-import {Link} from "react-router-dom";
+import '../../App.css';
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import ExplainBox from '../questioner/ExplainBox';
 
 function ToQuestionerTransitionConfirm() {
     return (
@@ -15,7 +16,7 @@ function ToQuestionerTransitionConfirm() {
                 <p className="text-lg">交代してください</p>
             </div>
 
-            <Link to={"/Questioner"}>
+            <Link to={"/2team/Questioner"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     出題画面へ
                 </button>
