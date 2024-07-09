@@ -1,7 +1,7 @@
 import '../App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../app/store";
-import {CensorType} from "../app/redux/settings";
+import {CensorType, DifficultyType} from "../app/redux/settings";
 import React from 'react';
 import {Link} from "react-router-dom";
 import TopicGenerationButton from "./TopicGenerationButton";
@@ -12,7 +12,7 @@ function ExplainBox() {
     const theme = useSelector((state: StateType) => state.history.value.currentGameStatusA.theme)
     const explanation = useSelector((state: StateType) => state.history.value.currentGameStatusA.tmp_explanation)
     const censorType: CensorType = useSelector((state: StateType) => state.settings.value.censorType)
-
+    const difficulty: DifficultyType = useSelector((state: StateType) => state.settings.value.difficulty)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         dispatch(updateExplanationA(event.target.value))
@@ -24,6 +24,7 @@ function ExplainBox() {
         const requestBody = {
             text: explanation,
             theme: theme,
+            difficulty: difficulty,
         };
         try {
             const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + censorType.path, {
