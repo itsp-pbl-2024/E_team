@@ -11,8 +11,13 @@ import HowTo from './help/HowTo';
 import Result from "./result/Result";
 import Correct from './result/Correct';
 import Wrong from './result/Wrong';
+
 import { useDispatch } from "react-redux";
 import { resetCurrentGame } from "./app/redux/history";
+
+import ExplainBox2 from './multiTeamModeView/questioner/ExplainBox';
+;
+
 
 
 const Layout = ({ hideHeaderPaths = [] }: { hideHeaderPaths: string[] }) => {
@@ -64,6 +69,7 @@ export default function App() {
                     <Route path='/result' element={<Result />} />
                     <Route path='/to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm />} />
                     <Route path='/HowTo' element={<HowTo />} />
+                    <Route path='/2team/questioner' element={<ExplainBox2/>}/>
                 </Route>
             </Routes>
         </div>

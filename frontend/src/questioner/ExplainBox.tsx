@@ -5,22 +5,22 @@ import {CensorType, DifficultyType} from "../app/redux/settings";
 import React from 'react';
 import {Link} from "react-router-dom";
 import TopicGenerationButton from "./TopicGenerationButton";
-import {appendCensoredExplanation, confirmExplanation, confirmTheme, updateExplanation} from "../app/redux/history";
+import {appendCensoredExplanationA, confirmExplanationA, confirmThemeA, updateExplanationA} from "../app/redux/history";
 
 function ExplainBox() {
     const dispatch = useDispatch()
-    const theme = useSelector((state: StateType) => state.history.value.currentGameStatus.theme)
-    const explanation = useSelector((state: StateType) => state.history.value.currentGameStatus.tmp_explanation)
+    const theme = useSelector((state: StateType) => state.history.value.currentGameStatusA.theme)
+    const explanation = useSelector((state: StateType) => state.history.value.currentGameStatusA.tmp_explanation)
     const censorType: CensorType = useSelector((state: StateType) => state.settings.value.censorType)
     const difficulty: DifficultyType = useSelector((state: StateType) => state.settings.value.difficulty)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(updateExplanation(event.target.value))
+        dispatch(updateExplanationA(event.target.value))
     };
 
     const censorExplanation = async () => {
-        dispatch(confirmTheme())
-        dispatch(confirmExplanation())
+        dispatch(confirmThemeA())
+        dispatch(confirmExplanationA())
         const requestBody = {
             text: explanation,
             theme: theme,
@@ -37,7 +37,7 @@ function ExplainBox() {
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);
-                dispatch(appendCensoredExplanation(data['censored_text']))
+                dispatch(appendCensoredExplanationA(data['censored_text']))
             } else {
                 console.log(await response.json())
             }

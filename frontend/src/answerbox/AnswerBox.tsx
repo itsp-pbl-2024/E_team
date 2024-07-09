@@ -3,20 +3,20 @@ import './AnswerBox.css'
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../app/store";
 import {Link} from "react-router-dom";
-import {appendAnswer} from "../app/redux/history";
+import {appendAnswerA} from "../app/redux/history";
 
 function AnswerBox() {
     const [userAnswer, setUserAnswer] = useState('');
 
     const dispatch = useDispatch()
-    const censoredExplanation = useSelector((state: StateType) => state.history.value.currentGameStatus.censored_explanations).at(-1)
+    const censoredExplanation = useSelector((state: StateType) => state.history.value.currentGameStatusA.censored_explanations).at(-1)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
     };
 
     const confirm = () => {
-        dispatch(appendAnswer(userAnswer))
+        dispatch(appendAnswerA(userAnswer))
     }
 
     return (
