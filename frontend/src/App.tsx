@@ -78,7 +78,7 @@ export default function App() {
                     <Route path='to_answer_transition_confirm' element={<ToAnswerTransitionConfirm2/>}/>
                     <Route path='to_questioner_transition_confirm' element={<ToQuestionerTransitionConfirm2/>}/>
                     <Route path='result' element={<Result2/>}/>
-                    <Route path='correct' element={<Correct2/>}/>
+                    <Route path='correct' element={<Correct2 wonTeam={"Noneチーム"}/>}/>
                     <Route path='wrong' element={<Wrong2/>}/>
                 </Route>
             </Routes>
