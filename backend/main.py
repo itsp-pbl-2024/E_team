@@ -2,10 +2,9 @@ from fastapi import FastAPI
 import random
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from util.censor import censor
+from util.censor import censor, DifficultyType
 from util.chatgpt import censor_by_chatgpt
 from util.chatgpt import is_synonym_by_chatgpt
-import enum
 
 app = FastAPI()
 
@@ -32,11 +31,6 @@ async def get_theme():
         "theme": theme_list[index]
     }
 
-# frontendと合わせた
-class DifficultyType(enum.Enum):
-    normal = "普通"
-    hard = "難しい"
-
 class CensorItem(BaseModel):
     text: str
     theme: str
@@ -46,7 +40,7 @@ class CensorItem(BaseModel):
 async def censor_text(item: CensorItem):
     print(f"original:{item.text}")
     print(f"difficulty:{item.difficulty.value}")
-    censored_text = censor(item.text, item.theme)
+    censored_text = censor(item.text, item.theme, item.difficulty)
     print(f"censored:{censored_text}")
     return {"censored_text": censored_text}
 

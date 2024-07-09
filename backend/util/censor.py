@@ -1,12 +1,22 @@
 import spacy
 from fastapi import HTTPException
+import enum
 
 ###
 # Censor words from tetx that are very similar to theme
 ###
 
+# frontendと合わせた
+class DifficultyType(enum.Enum):
+    normal = "普通"
+    hard = "難しい"
 
-def censor(text: str, theme: str):
+def censor(text: str, theme: str, difficulty: DifficultyType):
+    similarity_th = 0.4 if difficulty == DifficultyType.normal else 0.3
+    if difficulty == DifficultyType.hard:
+        from .censor_wikipedia import censor_by_wikipedia
+        return censor_by_wikipedia(text, theme, difficulty)
+    
     nlp = spacy.load("ja_core_news_lg")
     if not theme:
         log("Error: Please provide a theme for censorship.")
@@ -22,7 +32,7 @@ def censor(text: str, theme: str):
     censored_tokens = []
     for token in doc:
         print(token, token.similarity(theme_doc))
-        if any(abs(token.similarity(theme_token)) > 0.4 for theme_token in theme_doc):
+        if any(abs(token.similarity(theme_token)) > similarity_th for theme_token in theme_doc):
             print(f'token: "{token}" is censored.')
             censored_tokens.append("<censor>")
         else:
@@ -52,5 +62,6 @@ def censor_by_list(text: str, theme: str, refs: list[str]):
             censored_tokens.append(token.text)
 
     censored_text = ''.join(censored_tokens)
-    log(f'censored text: {censored_text}')
+    #log(f'censored text: {censored_text}')
+    #print(f'censored text: {censored_text}')
     return censored_text
