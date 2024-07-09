@@ -1,13 +1,14 @@
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import './TopicGenerationButton.css'
-import {useDispatch, useSelector} from "react-redux";
-import {StateType} from "../app/store";
-import {changeThemeA} from "../app/redux/history";
+import { useDispatch, useSelector } from "react-redux";
+import { StateType } from "../app/store";
+import { changeThemeA } from "../app/redux/history";
 
 function TopicGenerationButton() {
     const dispatch = useDispatch()
     const theme = useSelector((state: StateType) => state.history.value.currentGameStatusA.theme)
     const theme_confirmed = useSelector((state: StateType) => state.history.value.currentGameStatusA.theme_confirmed)
+
     const GenerateButtonClick = async () => {
         if (theme_confirmed) return
         try {
@@ -28,6 +29,33 @@ function TopicGenerationButton() {
             console.error('Error fetching data:', error);
         }
     };
+
+    const InitTheme = async () => {
+        if (theme) {
+            return;
+        }
+        try {
+            const response = await fetch((process.env.REACT_APP_BACKEND_URL?.toString() ?? "") + "/theme", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (response.ok) {
+                const data = await response.json();
+                dispatch(changeThemeA(data.theme))
+                console.log(data);
+            } else {
+                console.log(await response.json());
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    useEffect(() => {
+        InitTheme();
+    }, []);
 
     return (
         <div className="m-6">

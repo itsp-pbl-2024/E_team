@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './AnswerBox.css'
-import {useDispatch, useSelector} from "react-redux";
-import {StateType} from "../app/store";
-import {Link} from "react-router-dom";
-import {appendAnswerA} from "../app/redux/history";
+import { useDispatch, useSelector } from "react-redux";
+import { StateType } from "../app/store";
+import { Link } from "react-router-dom";
+import { appendAnswerA } from "../app/redux/history";
 
 function AnswerBox() {
     const [userAnswer, setUserAnswer] = useState('');
@@ -32,16 +32,11 @@ function AnswerBox() {
                 onChange={handleInputChange}
                 placeholder="Enter your answer"
                 className="m-4"
-            /><br/>
-            {/*<button className='checkAnswerButton' onClick={checkAnswer} disabled={isCheckButtonDisabled}>Check</button>*/}
-            {/*{isCorrect ? (*/}
-            {/*    <p className="correct">Correct!</p>*/}
-            {/*) : (*/}
-            {/*    <p className="incorrect">Incorrect. Try again!</p>*/}
-            {/*)}*/}
+            /><br />
             <Link to={"/result"}>
-                <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-                        onClick={confirm}>
+                <button className='checkAnswerButton'
+                    onClick={confirm}
+                    disabled={!userAnswer}>
                     確定する
                 </button>
             </Link>

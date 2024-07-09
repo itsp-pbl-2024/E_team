@@ -22,7 +22,7 @@ function Settings() {
     }
 
     const resetSetings = () => {
-        dispatch(setCensorType(CensorTypes.chatgpt))
+        dispatch(setCensorType(CensorTypes.spacy))
         dispatch(setVolume(50))
         dispatch(setDifficulty(DifficutyTypes.normal))
         dispatch(setLanguage(LanguageTypes.ja))
