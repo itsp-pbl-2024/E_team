@@ -1,7 +1,7 @@
 import '../../App.css';
 import {useDispatch, useSelector} from "react-redux";
 import {StateType} from "../../app/store";
-import {CensorType} from "../../app/redux/settings";
+import {CensorType, DifficultyType} from "../../app/redux/settings";
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import TopicGenerationButtonA from "./TopicGenerationButtonA";
@@ -21,6 +21,7 @@ function ExplainBox() {
     const themeB = useSelector((state: StateType) => state.history.value.currentGameStatusB.theme)
     const explanationB = useSelector((state: StateType) => state.history.value.currentGameStatusB.tmp_explanation)
     const censorType: CensorType = useSelector((state: StateType) => state.settings.value.censorType)
+    const difficulty: DifficultyType = useSelector((state: StateType) => state.settings.value.difficulty)
 
     const [hideA, setHideA] = useState(true)
     const [hideB, setHideB] = useState(true)
@@ -47,6 +48,7 @@ function ExplainBox() {
                 body: JSON.stringify({
                     text: explanationA,
                     theme: themeA,
+                    difficulty: difficulty,
                 }),
             }).then(async (response) => {
                 const data = await response.json();
@@ -63,6 +65,7 @@ function ExplainBox() {
                 body: JSON.stringify({
                     text: explanationB,
                     theme: themeB,
+                    difficulty: difficulty,
                 }),
             }).then(async (response) => {
                 const data = await response.json();

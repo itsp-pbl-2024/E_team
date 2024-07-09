@@ -1,38 +1,54 @@
-import '../index.css';
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import '../App.css';
+import {Link} from "react-router-dom";
 import React, {useState} from 'react';
-import Players from '../players/Players';
+import { useDispatch } from 'react-redux';
+import { setMode } from '../app/redux/mode';
+
 import Logo from '../img/logo.png'
-import Button from '@mui/material/Button';
 
 function Home() {
     const [username, setUsername] = useState<string>('');
-  
+    const dispatch = useDispatch();
 
+  
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setUsername(event.target.value);
     };
+
+    const handleSingleMode = () => {
+        dispatch(setMode('single'));
+      };
+    
+      const handleDoubleMode = () => {
+        dispatch(setMode('double'));
+      };
   
     return (
         <>
             <div className="h-screen flex flex-col items-center justify-center">
 
-                <img className="block h-8 w-auto m-8" src={Logo} alt="C∃ИS BR∃∀K" width={100} height={100} />
+                <img className="block h-14 w-auto m-8" src={Logo} alt="C∃ИS BR∃∀K" />
                 <Link to={"/players"}>
-                    <Button variant='contained' className="w-40 my-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        ゲーム開始
-                    </Button>
+                    <button className="btn-primary w-60 my-2" onClick={handleSingleMode}>
+                        ゲーム開始 (協力モード)
+                    </button>
+                </Link>
+                <Link to={"/players"}>
+                    <button className="btn-primary w-60 my-2" onClick={handleDoubleMode}>
+                        ゲーム開始 (チーム戦モード)
+                    </button>
                 </Link>
                 <Link to={"/settings"}>
-                    <Button variant='contained' className="w-40 my-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button className="btn-primary w-60 my-2">
                         設定
-                    </Button>
+                    </button>
+                </Link>
+                <Link to={"/Howto"}>
+                    <button className="btn-primary w-60 my-2">
+                        ヘルプ
+                    </button>
                 </Link>
             </div>
-
-            <Routes>
-                <Route path='/players' element={<Players/>}/>
-            </Routes>
         </>
     );
 }
