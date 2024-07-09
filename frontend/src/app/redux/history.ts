@@ -18,8 +18,9 @@ export type ThemeHistory = {
 }
 
 export type HistoryType = {
-    currentGameStatus: CurrentGame,
-    themeHistories: ThemeHistory[],
+    currentGameStatusA: CurrentGame,
+    currentGameStatusB: CurrentGame,
+    themeHistories: ThemeHistory[][],
 }
 
 const initialGame = {
@@ -35,47 +36,75 @@ export const historySlice = createSlice({
     name: 'history',
     initialState: {
         value: {
-            currentGameStatus: initialGame,
-            themeHistories: [] as CurrentGame[],
+            currentGameStatusA: initialGame,
+            currentGameStatusB: initialGame,
+            themeHistories: [] as CurrentGame[][],
         } as HistoryType
     },
     reducers: {
-        changeTheme: (state, action) => {
-            state.value.currentGameStatus.theme = action.payload
-            state.value.currentGameStatus.theme_confirmed = false
+        changeThemeA: (state, action) => {
+            state.value.currentGameStatusA.theme = action.payload
+            state.value.currentGameStatusA.theme_confirmed = false
         },
-        confirmTheme: (state) => {
-            state.value.currentGameStatus.theme_confirmed = true
+        confirmThemeA: (state) => {
+            state.value.currentGameStatusA.theme_confirmed = true
         },
-        confirmExplanation: (state) => {
-            state.value.currentGameStatus.explanations = [...state.value.currentGameStatus.explanations, state.value.currentGameStatus.tmp_explanation]
-            state.value.currentGameStatus.tmp_explanation = ""
+        confirmExplanationA: (state) => {
+            state.value.currentGameStatusA.explanations = [...state.value.currentGameStatusA.explanations, state.value.currentGameStatusA.tmp_explanation]
+            state.value.currentGameStatusA.tmp_explanation = ""
         },
-        updateExplanation: (state, action) => {
-            state.value.currentGameStatus.tmp_explanation = action.payload
+        updateExplanationA: (state, action) => {
+            state.value.currentGameStatusA.tmp_explanation = action.payload
         },
-        appendCensoredExplanation: (state, action) => {
-            state.value.currentGameStatus.censored_explanations = [...state.value.currentGameStatus.censored_explanations, action.payload]
+        appendCensoredExplanationA: (state, action) => {
+            state.value.currentGameStatusA.censored_explanations = [...state.value.currentGameStatusA.censored_explanations, action.payload]
         },
-        appendAnswer: (state, action) => {
-            state.value.currentGameStatus.answers = [...state.value.currentGameStatus.answers, action.payload]
+        appendAnswerA: (state, action) => {
+            state.value.currentGameStatusA.answers = [...state.value.currentGameStatusA.answers, action.payload]
+        },
+        changeThemeB: (state, action) => {
+            state.value.currentGameStatusB.theme = action.payload
+            state.value.currentGameStatusB.theme_confirmed = false
+        },
+        confirmThemeB: (state) => {
+            state.value.currentGameStatusB.theme_confirmed = true
+        },
+        confirmExplanationB: (state) => {
+            state.value.currentGameStatusB.explanations = [...state.value.currentGameStatusB.explanations, state.value.currentGameStatusB.tmp_explanation]
+            state.value.currentGameStatusB.tmp_explanation = ""
+        },
+        updateExplanationB: (state, action) => {
+            state.value.currentGameStatusB.tmp_explanation = action.payload
+        },
+        appendCensoredExplanationB: (state, action) => {
+            state.value.currentGameStatusB.censored_explanations = [...state.value.currentGameStatusB.censored_explanations, action.payload]
+        },
+        appendAnswerB: (state, action) => {
+            state.value.currentGameStatusB.answers = [...state.value.currentGameStatusB.answers, action.payload]
         },
         finishCurrentGame: (state) => {
-            state.value.themeHistories = [...state.value.themeHistories, state.value.currentGameStatus as ThemeHistory]
+            state.value.themeHistories = [...state.value.themeHistories, [state.value.currentGameStatusA, state.value.currentGameStatusB] as ThemeHistory[]]
         },
         resetCurrentGame: (state) => {
-            state.value.currentGameStatus = initialGame
+            state.value.currentGameStatusA = initialGame
+            state.value.currentGameStatusB = initialGame
         }
     }
 })
 
 export const {
-    changeTheme,
-    confirmTheme,
-    confirmExplanation,
-    updateExplanation,
-    appendCensoredExplanation,
-    appendAnswer,
+    changeThemeA,
+    confirmThemeA,
+    confirmExplanationA,
+    updateExplanationA,
+    appendCensoredExplanationA,
+    appendAnswerA,
+    changeThemeB,
+    confirmThemeB,
+    confirmExplanationB,
+    updateExplanationB,
+    appendCensoredExplanationB,
+    appendAnswerB,
     finishCurrentGame,
     resetCurrentGame,
 } = historySlice.actions
