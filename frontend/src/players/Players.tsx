@@ -94,8 +94,6 @@ function Players() {
             shuffle(indices);
             const teamSize = indices.length / 2 | 0;
             const head1 = 0;
-            console.log('Team size: ' + teamSize);
-            console.log(indices)
             const head2 = teamSize;
 
             const updatedUserList = userList.map((user, i) => {
