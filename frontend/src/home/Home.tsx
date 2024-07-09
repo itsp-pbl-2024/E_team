@@ -1,11 +1,8 @@
-import '../index.css';
-import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
-import ExplainBox from '../questioner/ExplainBox';
+import '../App.css';
+import {Link} from "react-router-dom";
 import React, {useState} from 'react';
-import Players from '../players/Players';
-import Settings from '../settings/Settings';
+
 import Logo from '../img/logo.png'
-import HowTo from '../help/HowTo';
 
 function Home() {
     const [username, setUsername] = useState<string>('');
