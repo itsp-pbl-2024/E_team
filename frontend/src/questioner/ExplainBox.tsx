@@ -1,11 +1,11 @@
 import '../App.css';
-import {useDispatch, useSelector} from "react-redux";
-import {StateType} from "../app/store";
-import {CensorType} from "../app/redux/settings";
+import { useDispatch, useSelector } from "react-redux";
+import { StateType } from "../app/store";
+import { CensorType } from "../app/redux/settings";
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import TopicGenerationButton from "./TopicGenerationButton";
-import {appendCensoredExplanationA, confirmExplanationA, confirmThemeA, updateExplanationA} from "../app/redux/history";
+import { appendCensoredExplanationA, confirmExplanationA, confirmThemeA, updateExplanationA } from "../app/redux/history";
 
 function ExplainBox() {
     const dispatch = useDispatch()
@@ -47,7 +47,7 @@ function ExplainBox() {
 
     return (
         <div>
-            <TopicGenerationButton/>
+            <TopicGenerationButton />
 
             <div className="flex flex-col items-center p-4">
                 <textarea
@@ -59,9 +59,9 @@ function ExplainBox() {
             </div>
 
             <Link to={"/to_answer_transition_confirm"}>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={censorExplanation}
-                        disabled={!explanation}
+                <button
+                    onClick={censorExplanation}
+                    disabled={!explanation}
                 >
                     確定する
                 </button>

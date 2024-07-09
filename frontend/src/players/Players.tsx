@@ -73,7 +73,7 @@ function Players() {
                     className='p-2'
                     placeholder="名前を入力してください"
                 />
-                <button onClick={handleAddParticipant}>
+                <button onClick={handleAddParticipant} disabled={!username}>
                     追加
                 </button>
             </div>
@@ -94,12 +94,12 @@ function Players() {
             </div>
 
             <div>
-                <button onClick={assignRole} className='m-4'>
+                <button onClick={assignRole} className='m-4' disabled={userList.length === 0}>
                     役割を決める
                 </button>
                 <Link to={"/questioner"}>
                     <button className='m-4'
-                        disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length === 0}
+                        disabled={userList.some(a => (a.role == UserRole.Unassigned)) || userList.length < 2}
                     >
                         確定する
                     </button>

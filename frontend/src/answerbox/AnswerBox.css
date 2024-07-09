@@ -10,48 +10,19 @@
   @apply px-4 py-2 mr-2 rounded border border-gray-300;
 }
 
-.answer-box button {
-  @apply px-4 py-2 text-white bg-blue-500 rounded cursor-pointer;
-}
-
-.answer-box button:hover {
-  @apply bg-blue-700;
-}
 
 .answer-box p {
   @apply mt-2;
 }
 
-.answer-box p.correct {
-  @apply text-green-500;
+button {
+  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
 }
 
-.answer-box p.incorrect {
-  @apply text-red-500;
+button:hover {
+  @apply bg-blue-700;
 }
 
-.checkAnswerButton:hover {
-  background-color: #0056b3; /* ホバー時の背景色 */
-}
-
-.checkAnswerButton:disabled{
-  background-color: gray;
-
-}
-.checkAnswerButton:disabled:hover{
-  background-color: gray;
-
-}
-
-.TransitionButton:hover {
-  background-color: #0056b3; /* ホバー時の背景色 */
-}
-
-.TransitionButton:disabled{
-  background-color: gray;
-
-}
-.TransitionButton:disabled:hover{
-  background-color: gray;
-
+button:disabled {
+  @apply bg-gray-200;
 }
